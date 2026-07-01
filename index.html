@@ -3,112 +3,384 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HabitCrew Support</title>
+<title>HabitCrew — Build streaks you don't do alone</title>
+<meta name="description" content="HabitCrew is a habit tracker you can build alone or with your crew. Track daily habits, see your streak form, and keep each other honest.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
+  :root {
+    --bg: #0A0A0B;
+    --white: #F4F3F1;
+    --muted: #8B8B8F;
+    --muted-soft: #5F5F63;
+    --rule: rgba(255,255,255,0.08);
+
+    --green: #8DC63F;
+    --green-bg: #172007;
+    --green-line: rgba(141,198,63,0.22);
+
+    --red: #E8483C;
+    --red-bg: #21110E;
+    --red-line: rgba(232,72,60,0.20);
+
+    --orange: #E8823C;
+    --orange-bg: #241809;
+    --orange-line: rgba(232,130,60,0.20);
+
+    --avatar: #3C4650;
+    --max: 1120px;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
   body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    max-width: 680px;
+    margin: 0;
+    background: var(--bg);
+    color: var(--white);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, .wordmark, .card-title {
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 700;
+  }
+
+  a { color: inherit; }
+
+  .wrap {
+    max-width: var(--max);
     margin: 0 auto;
-    padding: 48px 24px 80px;
-    color: #1a1a1a;
-    line-height: 1.6;
+    padding: 0 28px;
   }
-  h1 {
-    font-size: 28px;
-    margin-bottom: 4px;
-  }
-  .subtitle {
-    color: #666;
-    margin-bottom: 32px;
-  }
-  .contact-box {
-    background: #f5f5f7;
-    border-radius: 12px;
-    padding: 20px 24px;
-    margin-bottom: 40px;
-  }
-  .contact-box a {
-    color: #2563eb;
+
+  /* Header */
+  header { padding: 30px 0 0; }
+  .wordmark {
+    font-size: 21px;
     text-decoration: none;
-    font-weight: 600;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 3px;
+    color: var(--white);
   }
-  .contact-box a:hover {
-    text-decoration: underline;
+  .wordmark .dot { color: var(--green); line-height: 0; }
+
+  .eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 700;
   }
-  h2 {
-    font-size: 20px;
-    margin-top: 40px;
-    margin-bottom: 16px;
+
+  /* Hero */
+  .hero {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 56px;
+    align-items: center;
+    padding: 68px 0 84px;
   }
-  details {
-    border-bottom: 1px solid #e5e5e5;
-    padding: 16px 0;
+  .hero h1 {
+    font-size: clamp(36px, 4.6vw, 54px);
+    line-height: 1.08;
+    margin: 16px 0 20px;
+    color: var(--white);
   }
-  summary {
-    font-weight: 600;
-    cursor: pointer;
-    list-style: none;
+  .hero h1 .hl { color: var(--green); }
+  .hero p {
+    font-size: 17px;
+    color: var(--muted);
+    max-width: 42ch;
+    margin: 0 0 26px;
   }
-  summary::-webkit-details-marker {
-    display: none;
-  }
-  summary::before {
-    content: "+ ";
-    color: #2563eb;
-  }
-  details[open] summary::before {
-    content: "− ";
-  }
-  details p {
-    margin-top: 12px;
-    color: #444;
-  }
-  footer {
-    margin-top: 56px;
+
+  .status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
     font-size: 13px;
-    color: #999;
+    font-weight: 600;
+    color: var(--white);
+    background: #141414;
+    border: 1px solid var(--rule);
+    padding: 8px 14px 8px 12px;
+    border-radius: 100px;
+  }
+  .status-pill .pulse {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--green);
+    animation: pulse 2.4s ease-out infinite;
+  }
+  @keyframes pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(141,198,63,0.5); }
+    70%  { box-shadow: 0 0 0 8px rgba(141,198,63,0); }
+    100% { box-shadow: 0 0 0 0 rgba(141,198,63,0); }
+  }
+
+  /* --- App-style cards --- */
+  .app-card {
+    border-radius: 22px;
+    padding: 20px 20px 18px;
+  }
+  .app-card.green  { background: var(--green-bg);  border: 1px solid var(--green-line); }
+  .app-card.red    { background: var(--red-bg);    border: 1px solid var(--red-line); }
+  .app-card.orange { background: var(--orange-bg); border: 1px solid var(--orange-line); }
+
+  .card-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+  .card-icon {
+    width: 42px; height: 42px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+  .card-icon.green  { background: rgba(141,198,63,0.16); }
+  .card-icon.red    { background: rgba(232,72,60,0.16); }
+  .card-icon.orange { background: rgba(232,130,60,0.16); }
+
+  .card-title { font-size: 18px; color: var(--white); margin: 0 0 2px; }
+  .card-sub { font-size: 13px; color: var(--muted); font-family: 'Inter'; font-weight: 500; }
+
+  .check-badge {
+    width: 30px; height: 30px; border-radius: 9px;
+    background: var(--green);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+
+  /* Crew card avatars */
+  .goal-label { font-size: 12px; color: var(--muted); margin: 2px 0 14px; }
+  .avatars { display: flex; justify-content: space-between; gap: 6px; }
+  .avatar-col { display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 1; }
+  .avatar-count { font-size: 13px; font-weight: 700; color: var(--green); }
+  .avatar-ring {
+    width: 46px; height: 46px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    padding: 3px;
+    background: conic-gradient(var(--green) calc(var(--pct) * 1%), rgba(255,255,255,0.08) 0);
+  }
+  .avatar-ring .inner {
+    width: 100%; height: 100%; border-radius: 50%;
+    background: var(--avatar);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--white); font-weight: 700; font-size: 14px;
+    font-family: 'Inter';
+  }
+  .avatar-name { font-size: 11px; color: var(--muted); }
+
+  /* Mini heatmap grid */
+  .mini-grid {
+    display: grid;
+    grid-template-columns: repeat(15, 1fr);
+    gap: 3px;
+  }
+  .mini-grid .c {
+    aspect-ratio: 1;
+    border-radius: 3px;
+    background: rgba(255,255,255,0.05);
+    opacity: 0;
+    animation: pop 0.4s ease forwards;
+    animation-delay: var(--d);
+  }
+  .mini-grid.red .c.lit { background: var(--red); }
+  .mini-grid.green .c.lit { background: var(--green); }
+  .mini-grid.orange .c.lit { background: var(--orange); }
+  @keyframes pop { to { opacity: 1; } }
+  @media (prefers-reduced-motion: reduce) {
+    .mini-grid .c { animation: none; opacity: 1; }
+    .status-pill .pulse { animation: none; }
+  }
+
+  .hero-stack { display: flex; flex-direction: column; gap: 16px; }
+
+  /* Features */
+  .features {
+    border-top: 1px solid var(--rule);
+    padding: 60px 0 72px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .feature h2 {
+    font-size: 19px;
+    color: var(--white);
+    margin: 4px 0 8px;
+  }
+  .feature p {
+    font-size: 14px;
+    color: var(--muted);
+    margin: 0 0 16px;
+    max-width: 30ch;
+  }
+  .feature .mini-grid {
+    grid-template-columns: repeat(12, 1fr);
+  }
+
+  /* Footer */
+  footer {
+    border-top: 1px solid var(--rule);
+    padding: 28px 0 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .foot-left { font-size: 13px; color: var(--muted); }
+  .foot-links { display: flex; gap: 22px; font-size: 13px; flex-wrap: wrap; }
+  .foot-links a {
+    text-decoration: none;
+    color: var(--muted);
+    transition: color 0.15s ease;
+  }
+  .foot-links a:hover, .foot-links a:focus-visible { color: var(--white); }
+  a:focus-visible { outline: 2px solid var(--green); outline-offset: 3px; }
+
+  @media (max-width: 860px) {
+    .hero { grid-template-columns: 1fr; padding: 44px 0 52px; gap: 32px; }
+    .features { grid-template-columns: 1fr; gap: 18px; padding: 44px 0 52px; }
+    footer { flex-direction: column; align-items: flex-start; }
+    .avatars { flex-wrap: wrap; }
   }
 </style>
 </head>
 <body>
 
-  <h1>HabitCrew Support</h1>
-  <p class="subtitle">Need help? We're here for you.</p>
-
-  <div class="contact-box">
-    Email us anytime at <a href="mailto:habitcrewsupport@gmail.com">habitcrewsupport@gmail.com</a> and we'll get back to you as soon as we can.
+<header>
+  <div class="wrap">
+    <a class="wordmark" href="/">habitcrew<span class="dot">.</span></a>
   </div>
+</header>
 
-  <h2>Frequently Asked Questions</h2>
+<main class="wrap">
+  <section class="hero">
+    <div>
+      <span class="eyebrow">Habit tracking, together</span>
+      <h1>Build streaks<br><span class="hl">with your crew.</span></h1>
+      <p>Track any habit solo, or start one with up to five friends and watch everyone's progress land on the same grid. No leaderboard shame — just the pattern of what you actually showed up for.</p>
+      <span class="status-pill"><span class="pulse"></span>iOS app — launching soon</span>
+    </div>
 
-  <details>
-    <summary>How do I cancel my subscription?</summary>
-    <p>You can manage or cancel your HabitCrew subscription anytime through your device's subscription settings (App Store → your profile → Subscriptions on iOS). Cancelling stops future billing; you'll keep access until the end of your current billing period.</p>
-  </details>
+    <div class="hero-stack">
+      <div class="app-card green">
+        <div class="card-row">
+          <div style="display:flex; gap:12px; align-items:center;">
+            <div class="card-icon green">🏋️</div>
+            <div>
+              <p class="card-title">Gym Crew</p>
+              <p class="card-sub">Mon / Wed / Fri</p>
+            </div>
+          </div>
+          <div class="check-badge">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 12L9 17L20 6" stroke="#0A0A0B" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </div>
+        <p class="goal-label">Goal: 5 / Week</p>
+        <div class="avatars" id="avatars"></div>
+      </div>
 
-  <details>
-    <summary>How do streaks and timezones work?</summary>
-    <p>Your habit streaks are calculated based on your device's local date, so completing a habit "today" always lines up with your own day, even if you travel or your timezone changes.</p>
-  </details>
+      <div class="app-card red">
+        <div class="card-row">
+          <div style="display:flex; gap:12px; align-items:center;">
+            <div class="card-icon red">🏃</div>
+            <div>
+              <p class="card-title">Morning Run</p>
+              <p class="card-sub">63 day streak</p>
+            </div>
+          </div>
+        </div>
+        <div class="mini-grid red" id="heatmap"></div>
+      </div>
+    </div>
+  </section>
 
-  <details>
-    <summary>How do I delete my account and data?</summary>
-    <p>You can delete your account directly in the app: go to Settings and tap the red "Delete Account" button. This permanently removes your account and associated data. If you're unable to access this option, email us at habitcrewsupport@gmail.com with your account's email address and we'll process the deletion for you.</p>
-  </details>
+  <section class="features">
+    <div class="feature app-card green">
+      <div class="card-icon green">✅</div>
+      <h2>Mark it done, every day.</h2>
+      <p>Daily, weekly, or whatever cadence fits. Miss a day and the streak just moves on — no lecture about it.</p>
+      <div class="mini-grid green" id="strip-1"></div>
+    </div>
+    <div class="feature app-card orange">
+      <div class="card-icon orange">🤝</div>
+      <h2>Build it with your crew.</h2>
+      <p>Start a group habit and everyone's check-ins land on the same grid, so you can see who's showing up.</p>
+      <div class="mini-grid orange" id="strip-2"></div>
+    </div>
+    <div class="feature app-card red">
+      <div class="card-icon red">📊</div>
+      <h2>Watch the pattern form.</h2>
+      <p>Every square is a day. Months in, the grid tells you exactly what you stuck with — and what you didn't.</p>
+      <div class="mini-grid red" id="strip-3"></div>
+    </div>
+  </section>
+</main>
 
-  <details>
-    <summary>How do group habits work?</summary>
-    <p>Group habits let you and your crew track a shared habit together, with each member keeping their own individual streak visible to the group. It's built to keep everyone accountable without anyone's individual progress affecting the others'.</p>
-  </details>
+<footer class="wrap">
+  <div class="foot-left">© 2026 HabitCrew</div>
+  <nav class="foot-links">
+    <a href="/privacy">Privacy Policy</a>
+    <a href="/terms">Terms of Service</a>
+    <a href="/support">Support</a>
+    <a href="mailto:habitcrewsupport@gmail.com">habitcrewsupport@gmail.com</a>
+  </nav>
+</footer>
 
-  <details>
-    <summary>I found a bug or have a feature request — how do I tell you?</summary>
-    <p>The fastest way is in the app: go to the Profile tab and tap "Feedback and Suggestions." You can also email us at habitcrewsupport@gmail.com with details (screenshots are always welcome) and we'll take a look.</p>
-  </details>
+<script>
+  // Group card avatars
+  const members = [
+    { i: 'J', n: 'Jake', pct: 100 },
+    { i: 'M', n: 'Mia',  pct: 60  },
+    { i: 'A', n: 'Alex', pct: 80  },
+    { i: 'K', n: 'Kai',  pct: 40  },
+    { i: 'S', n: 'Sam',  pct: 100 },
+  ];
+  const avatarsEl = document.getElementById('avatars');
+  members.forEach(m => {
+    const col = document.createElement('div');
+    col.className = 'avatar-col';
+    col.innerHTML = `
+      <span class="avatar-count">${Math.round(m.pct / 20)}</span>
+      <div class="avatar-ring" style="--pct:${m.pct}">
+        <div class="inner">${m.i}</div>
+      </div>
+      <span class="avatar-name">${m.n}</span>
+    `;
+    avatarsEl.appendChild(col);
+  });
 
-  <footer>
-    HabitCrew · habitcrewsupport@gmail.com
-  </footer>
+  // Sparse heatmap grid (mostly unlit, a few lit squares) — matches the app's real density
+  function buildGrid(id, rows, cols, litChance, delayStep) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    let i = 0;
+    for (let r = 0; r < rows; r++) {
+      for (let c = 0; c < cols; c++) {
+        const sq = document.createElement('div');
+        sq.className = 'c' + (Math.random() < litChance ? ' lit' : '');
+        sq.style.setProperty('--d', (i * delayStep) + 's');
+        el.appendChild(sq);
+        i++;
+      }
+    }
+  }
+
+  buildGrid('heatmap', 6, 15, 0.12, 0.01);
+  buildGrid('strip-1', 2, 12, 0.22, 0.015);
+  buildGrid('strip-2', 2, 12, 0.22, 0.015);
+  buildGrid('strip-3', 2, 12, 0.22, 0.015);
+</script>
 
 </body>
 </html>
