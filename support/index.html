@@ -3,83 +3,162 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HabitCrew Support</title>
+<title>Support — HabitCrew</title>
+<meta name="description" content="HabitCrew support — get help, find answers to common questions, or contact us directly.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
+  :root {
+    --bg: #0A0A0B;
+    --white: #F4F3F1;
+    --muted: #9A9A9E;
+    --muted-soft: #6C6C70;
+    --rule: rgba(255,255,255,0.10);
+    --green: #8DC63F;
+    --green-bg: #172007;
+    --red: #E8483C;
+    --card: #131313;
+    --max: 680px;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
   body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    max-width: 680px;
-    margin: 0 auto;
-    padding: 48px 24px 80px;
-    color: #1a1a1a;
-    line-height: 1.6;
+    margin: 0;
+    background: var(--bg);
+    color: var(--white);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
   }
-  h1 {
-    font-size: 28px;
-    margin-bottom: 4px;
+
+  h1, h2, .wordmark {
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 700;
+    color: var(--white);
   }
-  .subtitle {
-    color: #666;
-    margin-bottom: 32px;
+
+  a { color: var(--green); text-decoration: none; }
+  a:hover, a:focus-visible { text-decoration: underline; }
+  a:focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
+
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+
+  header { padding: 30px 0 0; }
+  .wordmark {
+    font-size: 21px;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 3px;
+    color: var(--white);
   }
+  .wordmark .dot { color: var(--green); }
+
+  .doc-header { padding: 46px 0 8px; border-bottom: 1px solid var(--rule); margin-bottom: 32px; }
+  .doc-header h1 { font-size: clamp(30px, 4vw, 40px); margin: 0 0 10px; }
+  .doc-header .subtitle { color: var(--muted); font-size: 15.5px; margin: 0 0 30px; }
+
   .contact-box {
-    background: #f5f5f7;
-    border-radius: 12px;
-    padding: 20px 24px;
-    margin-bottom: 40px;
+    background: var(--card);
+    border: 1px solid var(--rule);
+    border-radius: 16px;
+    padding: 22px 26px;
+    margin-bottom: 44px;
+    font-size: 15.5px;
+    color: var(--muted);
   }
-  .contact-box a {
-    color: #2563eb;
-    text-decoration: none;
-    font-weight: 600;
+  .contact-box a { font-weight: 700; }
+
+  h2.section-title {
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-family: 'Inter';
+    font-weight: 700;
+    margin: 0 0 18px;
   }
-  .contact-box a:hover {
-    text-decoration: underline;
-  }
-  h2 {
-    font-size: 20px;
-    margin-top: 40px;
-    margin-bottom: 16px;
-  }
+
   details {
-    border-bottom: 1px solid #e5e5e5;
-    padding: 16px 0;
+    border-bottom: 1px solid var(--rule);
+    padding: 18px 0;
   }
+  details:first-of-type { border-top: 1px solid var(--rule); }
+
   summary {
-    font-weight: 600;
+    font-weight: 700;
+    font-size: 16px;
     cursor: pointer;
     list-style: none;
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    gap: 10px;
   }
-  summary::-webkit-details-marker {
-    display: none;
-  }
+  summary::-webkit-details-marker { display: none; }
   summary::before {
-    content: "+ ";
-    color: #2563eb;
+    content: "+";
+    color: var(--green);
+    font-family: 'Baloo 2', sans-serif;
+    font-size: 18px;
+    width: 16px;
+    flex-shrink: 0;
   }
-  details[open] summary::before {
-    content: "− ";
-  }
+  details[open] summary::before { content: "−"; }
+
   details p {
-    margin-top: 12px;
-    color: #444;
+    margin: 12px 0 2px 26px;
+    color: var(--muted);
+    font-size: 15px;
   }
+
+  address { font-style: normal; }
+
   footer {
+    border-top: 1px solid var(--rule);
     margin-top: 56px;
-    font-size: 13px;
-    color: #999;
+    padding: 28px 24px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    max-width: var(--max);
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .foot-left { font-size: 13px; color: var(--muted); }
+  .foot-links { display: flex; gap: 22px; font-size: 13px; flex-wrap: wrap; }
+  .foot-links a { color: var(--muted); }
+  .foot-links a:hover { color: var(--white); }
+
+  @media (max-width: 600px) {
+    footer { flex-direction: column; align-items: flex-start; }
   }
 </style>
 </head>
 <body>
 
-  <h1>HabitCrew Support</h1>
-  <p class="subtitle">Need help? We're here for you.</p>
+<header>
+  <div class="wrap">
+    <a class="wordmark" href="/">habitcrew<span class="dot">.</span></a>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div class="doc-header">
+    <h1>Support</h1>
+    <p class="subtitle">Need help? We're here for you.</p>
+  </div>
 
   <div class="contact-box">
     Email us anytime at <a href="mailto:habitcrewsupport@gmail.com">habitcrewsupport@gmail.com</a> and we'll get back to you as soon as we can.
   </div>
 
-  <h2>Frequently Asked Questions</h2>
+  <h2 class="section-title">Frequently asked questions</h2>
 
   <details>
     <summary>How do I cancel my subscription?</summary>
@@ -93,7 +172,7 @@
 
   <details>
     <summary>How do I delete my account and data?</summary>
-    <p>You can delete your account directly in the app: go to Settings and tap the red "Delete Account" button. This permanently removes your account and associated data. If you're unable to access this option, email us at habitcrewsupport@gmail.com with your account's email address and we'll process the deletion for you.</p>
+    <p>You can delete your account directly in the app: go to Settings and tap the red "Delete Account" button. This permanently removes your account and associated data. If you're unable to access this option, email us at <a href="mailto:habitcrewsupport@gmail.com">habitcrewsupport@gmail.com</a> with your account's email address and we'll process the deletion for you.</p>
   </details>
 
   <details>
@@ -103,12 +182,20 @@
 
   <details>
     <summary>I found a bug or have a feature request — how do I tell you?</summary>
-    <p>The fastest way is in the app: go to the Profile tab and tap "Feedback and Suggestions." You can also email us at habitcrewsupport@gmail.com with details (screenshots are always welcome) and we'll take a look.</p>
+    <p>The fastest way is in the app: go to the Profile tab and tap "Feedback and Suggestions." You can also email us at <a href="mailto:habitcrewsupport@gmail.com">habitcrewsupport@gmail.com</a> with details (screenshots are always welcome) and we'll take a look.</p>
   </details>
 
-  <footer>
-    HabitCrew · habitcrewsupport@gmail.com
-  </footer>
+</main>
+
+<footer>
+  <div class="foot-left">© 2026 HabitCrew</div>
+  <nav class="foot-links">
+    <a href="/privacy">Privacy Policy</a>
+    <a href="/terms">Terms of Service</a>
+    <a href="/support">Support</a>
+    <a href="mailto:habitcrewsupport@gmail.com">habitcrewsupport@gmail.com</a>
+  </nav>
+</footer>
 
 </body>
 </html>
