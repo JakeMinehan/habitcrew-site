@@ -4,31 +4,26 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HabitCrew — Build streaks you don't do alone</title>
-<meta name="description" content="HabitCrew is a habit tracker you can build alone or with your crew. Track daily habits, see your streak form, and keep each other honest.">
+<meta name="description" content="HabitCrew is a habit tracker you can build alone or with your crew. Track daily habits, see your streak form, and keep each other honest. Free on the App Store.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <style>
   :root {
     --bg: #0A0A0B;
     --white: #F4F3F1;
-    --muted: #8B8B8F;
+    --text: #ECEDEE;        /* app: habitName */
+    --muted: #9BA1A6;       /* app: habitDescription / day labels */
     --muted-soft: #5F5F63;
     --rule: rgba(255,255,255,0.08);
+    --empty: rgba(255,255,255,0.10);   /* app: empty habit square */
 
     --green: #8DC63F;
-    --green-bg: #172007;
-    --green-line: rgba(141,198,63,0.22);
+    --honey: #F3A247;
+    --crimson: #F04F4F;
+    --violet: #6C63D8;
 
-    --red: #E8483C;
-    --red-bg: #21110E;
-    --red-line: rgba(232,72,60,0.20);
-
-    --orange: #E8823C;
-    --orange-bg: #241809;
-    --orange-line: rgba(232,130,60,0.20);
-
-    --avatar: #3C4650;
     --max: 1120px;
   }
 
@@ -44,7 +39,7 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  h1, h2, .wordmark, .card-title {
+  h1, h2, .wordmark {
     font-family: 'Baloo 2', sans-serif;
     font-weight: 700;
   }
@@ -85,6 +80,7 @@
     align-items: center;
     padding: 68px 0 84px;
   }
+  .hero > * { min-width: 0; }
   .hero h1 {
     font-size: clamp(36px, 4.6vw, 54px);
     line-height: 1.08;
@@ -92,117 +88,220 @@
     color: var(--white);
   }
   .hero h1 .hl { color: var(--green); }
-  .hero p {
+  .hero-copy > p {
     font-size: 17px;
     color: var(--muted);
     max-width: 42ch;
-    margin: 0 0 26px;
+    margin: 0 0 28px;
   }
 
-  .status-pill {
+  /* Store buttons */
+  .cta-row {
+    display: flex;
+    align-items: stretch;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .store-btn, .soon-panel {
     display: inline-flex;
     align-items: center;
-    gap: 9px;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--white);
+    gap: 11px;
+    border-radius: 12px;
+    padding: 9px 18px 9px 15px;
+    min-height: 58px;
+    text-decoration: none;
+  }
+  .store-btn {
+    background: var(--white);
+    color: #0A0A0B;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.35);
+  }
+  .store-btn:hover, .store-btn:focus-visible { transform: translateY(-2px); }
+  .store-btn svg { flex-shrink: 0; }
+  .soon-panel {
     background: #141414;
     border: 1px solid var(--rule);
-    padding: 8px 14px 8px 12px;
-    border-radius: 100px;
+    color: var(--muted);
   }
-  .status-pill .pulse {
-    width: 8px; height: 8px; border-radius: 50%;
-    background: var(--green);
-    animation: pulse 2.4s ease-out infinite;
+  .soon-panel .material-icons { font-size: 26px; color: var(--muted); }
+  .btn-lines { display: flex; flex-direction: column; line-height: 1.15; }
+  .btn-lines small {
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    font-weight: 500;
+    opacity: 0.75;
   }
-  @keyframes pulse {
-    0%   { box-shadow: 0 0 0 0 rgba(141,198,63,0.5); }
-    70%  { box-shadow: 0 0 0 8px rgba(141,198,63,0); }
-    100% { box-shadow: 0 0 0 0 rgba(141,198,63,0); }
+  .btn-lines strong { font-size: 18px; font-weight: 700; letter-spacing: 0.01em; }
+  .soon-panel .btn-lines strong { color: var(--white); }
+
+  /* Material Icons — the same icon set the app renders through IconSymbol.
+     Boxed to 1em so the ligature text never widens its container while the
+     icon font is still loading. */
+  .material-icons {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1em;
+    height: 1em;
+    line-height: 1;
+    overflow: hidden;
+    flex-shrink: 0;
   }
 
-  /* --- App-style cards --- */
-  .app-card {
-    border-radius: 22px;
-    padding: 20px 20px 18px;
-  }
-  .app-card.green  { background: var(--green-bg);  border: 1px solid var(--green-line); }
-  .app-card.red    { background: var(--red-bg);    border: 1px solid var(--red-line); }
-  .app-card.orange { background: var(--orange-bg); border: 1px solid var(--orange-line); }
+  /* ── App habit card (mirrors components/habits/HabitCard.tsx) ───────────── */
+  .hero-stack { display: flex; flex-direction: column; gap: 14px; }
 
-  .card-row {
+  .habit-card {
+    border-radius: 10px;
+    padding: 2px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    background: rgba(255,255,255,0.04);
+  }
+  .habit-content { padding: 8px; }
+  .habit-top {
     display: flex;
     align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .habit-left { display: flex; flex: 1 1 0; min-width: 0; margin-right: 12px; }
+  .habit-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+    margin-left: 12px;
+  }
+  .habit-icon {
+    width: 44px; height: 44px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    margin-right: 10px;
+    flex-shrink: 0;
+  }
+  .habit-icon .material-icons { font-size: 32px; color: var(--c); }
+  .habit-info { flex: 1; min-width: 0; margin-left: -4px; }
+  .habit-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+    margin: 0 0 4px;
+    line-height: 1.25;
+  }
+  .habit-desc {
+    font-size: 13px;
+    color: var(--muted);
+    margin: 0;
+    line-height: 1.25;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Completion button (InstantButton) */
+  .complete-btn {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    border: 0;
+    background: rgba(255,255,255,0.1);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    padding: 0;
+  }
+  .complete-btn.done { background: var(--c); }
+  .complete-btn .material-icons { font-size: 20px; color: #FFFFFF; }
+
+  /* Additional stat slot: streak / 30-day % / group counter */
+  .stat { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .stat-row { display: flex; align-items: center; gap: 2px; }
+  .stat-num { font-size: 28px; font-weight: 800; line-height: 30px; color: var(--c); }
+  .stat-row .material-icons { font-size: 18px; color: var(--c); }
+  .stat-label {
+    font-size: 11px;
+    line-height: 12px;
+    letter-spacing: 1px;
+    color: var(--muted);
+  }
+  .group-stat { min-width: 54px; }
+  .group-stat .stat-row { gap: 4px; }
+  .group-stat .material-icons { font-size: 20px; }
+  .group-count { font-size: 22px; font-weight: 800; color: var(--c); }
+
+  /* Daily grid: 26 weeks × 7 days (grids/DailyGrid.tsx) */
+  .habit-progress {
+    display: flex;
+    justify-content: center;
+    margin: 4px 4px 0;
+  }
+  .day-labels {
+    display: grid;
+    grid-template-rows: repeat(7, 1fr);
+    gap: 3px;
+    width: 14px;
+    margin-right: 4px;
+    flex-shrink: 0;
+  }
+  .day-labels span {
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px;
+    line-height: 1;
+    color: var(--muted);
+  }
+  .daily-grid {
+    display: grid;
+    grid-template-columns: repeat(26, 1fr);
+    gap: 3px;
+    flex: 1 1 auto;
+    min-width: 0;
+    max-width: 387px;   /* 26 × 12px cells + 25 × 3px gaps */
+  }
+  .sq {
+    aspect-ratio: 1;
+    border-radius: 25%;
+    background: var(--empty);
+    /* Opt out of the automatic minimum size so the grid can shrink on narrow screens,
+       the same way the app's cells shrink to the card's measured width. */
+    min-width: 0;
+    min-height: 0;
+  }
+  .sq.lit { background: var(--c); }
+  .sq.today { box-shadow: inset 0 0 0 1px rgba(255,255,255,0.3); }
+  .anim .sq { opacity: 0; animation: pop 0.4s ease forwards var(--d); }
+  @keyframes pop { to { opacity: var(--o, 1); } }
+
+  /* List-view card (HabitCard view="list") */
+  .list-card {
+    border-radius: 12px;
+    padding: 10px 12px;
+  }
+  .list-row {
+    display: flex;
+    align-items: center;
     justify-content: space-between;
     gap: 12px;
-    margin-bottom: 14px;
   }
-  .card-icon {
-    width: 42px; height: 42px;
-    border-radius: 12px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 20px;
-    flex-shrink: 0;
+  .list-left { display: flex; align-items: center; gap: 2px; min-width: 0; }
+  .list-name { font-size: 16px; font-weight: 600; color: var(--text); margin: 0; }
+  .list-right { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+  .week-strip {
+    display: flex;
+    gap: 6px;
+    margin-top: 6px;
   }
-  .card-icon.green  { background: rgba(141,198,63,0.16); }
-  .card-icon.red    { background: rgba(232,72,60,0.16); }
-  .card-icon.orange { background: rgba(232,130,60,0.16); }
+  .day-col { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+  .day-col .sq {
+    width: 20px; height: 20px;
+    border-radius: 6px;
+    aspect-ratio: auto;
+  }
+  .day-col span { font-size: 11px; line-height: 1.1; color: var(--muted); }
+  .day-col.is-today span { font-weight: 700; }
 
-  .card-title { font-size: 18px; color: var(--white); margin: 0 0 2px; }
-  .card-sub { font-size: 13px; color: var(--muted); font-family: 'Inter'; font-weight: 500; }
-
-  .check-badge {
-    width: 30px; height: 30px; border-radius: 9px;
-    background: var(--green);
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-  }
-
-  /* Crew card avatars */
-  .goal-label { font-size: 12px; color: var(--muted); margin: 2px 0 14px; }
-  .avatars { display: flex; justify-content: space-between; gap: 6px; }
-  .avatar-col { display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 1; }
-  .avatar-count { font-size: 13px; font-weight: 700; color: var(--green); }
-  .avatar-ring {
-    width: 46px; height: 46px; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    padding: 3px;
-    background: conic-gradient(var(--green) calc(var(--pct) * 1%), rgba(255,255,255,0.08) 0);
-  }
-  .avatar-ring .inner {
-    width: 100%; height: 100%; border-radius: 50%;
-    background: var(--avatar);
-    display: flex; align-items: center; justify-content: center;
-    color: var(--white); font-weight: 700; font-size: 14px;
-    font-family: 'Inter';
-  }
-  .avatar-name { font-size: 11px; color: var(--muted); }
-
-  /* Mini heatmap grid */
-  .mini-grid {
-    display: grid;
-    grid-template-columns: repeat(15, 1fr);
-    gap: 3px;
-  }
-  .mini-grid .c {
-    aspect-ratio: 1;
-    border-radius: 3px;
-    background: rgba(255,255,255,0.05);
-    opacity: 0;
-    animation: pop 0.4s ease forwards;
-    animation-delay: var(--d);
-  }
-  .mini-grid.red .c.lit { background: var(--red); }
-  .mini-grid.green .c.lit { background: var(--green); }
-  .mini-grid.orange .c.lit { background: var(--orange); }
-  @keyframes pop { to { opacity: 1; } }
   @media (prefers-reduced-motion: reduce) {
-    .mini-grid .c { animation: none; opacity: 1; }
-    .status-pill .pulse { animation: none; }
+    .anim .sq { animation: none; opacity: var(--o, 1); }
+    .store-btn { transition: none; }
   }
-
-  .hero-stack { display: flex; flex-direction: column; gap: 16px; }
 
   /* Features */
   .features {
@@ -212,19 +311,25 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
   }
+  .feature {
+    border-radius: 16px;
+    padding: 20px;
+  }
+  .feature .habit-icon { margin: 0 0 6px; }
   .feature h2 {
     font-size: 19px;
-    color: var(--white);
-    margin: 4px 0 8px;
+    color: var(--text);
+    margin: 0 0 8px;
   }
   .feature p {
     font-size: 14px;
     color: var(--muted);
-    margin: 0 0 16px;
-    max-width: 30ch;
+    margin: 0 0 18px;
   }
-  .feature .mini-grid {
-    grid-template-columns: repeat(12, 1fr);
+  .feature .strip {
+    display: grid;
+    grid-template-columns: repeat(13, 1fr);
+    gap: 3px;
   }
 
   /* Footer */
@@ -251,7 +356,10 @@
     .hero { grid-template-columns: 1fr; padding: 44px 0 52px; gap: 32px; }
     .features { grid-template-columns: 1fr; gap: 18px; padding: 44px 0 52px; }
     footer { flex-direction: column; align-items: flex-start; }
-    .avatars { flex-wrap: wrap; }
+  }
+  @media (max-width: 420px) {
+    .day-col .sq { width: 16px; height: 16px; border-radius: 5px; }
+    .week-strip { gap: 4px; }
   }
 </style>
 </head>
@@ -265,64 +373,134 @@
 
 <main class="wrap">
   <section class="hero">
-    <div>
+    <div class="hero-copy">
       <span class="eyebrow">Habit tracking, together</span>
       <h1>Build streaks<br><span class="hl">with your crew.</span></h1>
       <p>Track any habit solo, or start one with up to five friends and watch everyone's progress land on the same grid. Even track weekly and monthly habits as well.</p>
-      <span class="status-pill"><span class="pulse"></span>iOS app — launching soon</span>
+
+      <div class="cta-row">
+        <a class="store-btn" href="https://apps.apple.com/au/app/habit-tracker-habitcrew/id6787154922" target="_blank" rel="noopener">
+          <svg width="26" height="30" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.53 4.08zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
+          </svg>
+          <span class="btn-lines">
+            <small>Download on the</small>
+            <strong>App Store</strong>
+          </span>
+        </a>
+
+        <div class="soon-panel">
+          <span class="material-icons" aria-hidden="true">android</span>
+          <span class="btn-lines">
+            <small>Coming soon to</small>
+            <strong>Android</strong>
+          </span>
+        </div>
+      </div>
     </div>
 
     <div class="hero-stack">
-      <div class="app-card green">
-        <div class="card-row">
-          <div style="display:flex; gap:12px; align-items:center;">
-            <div class="card-icon green">🏋️</div>
-            <div>
-              <p class="card-title">Gym Crew</p>
-              <p class="card-sub">Mon / Wed / Fri</p>
+      <!-- Large view: solo daily habit -->
+      <article class="habit-card" style="--c:#8DC63F; background:rgba(141,198,63,0.12);">
+        <div class="habit-content">
+          <div class="habit-top">
+            <div class="habit-left">
+              <div class="habit-icon"><span class="material-icons" aria-hidden="true">sailing</span></div>
+              <div class="habit-info">
+                <p class="habit-name">Meditation</p>
+                <p class="habit-desc">Meditate every day</p>
+              </div>
+            </div>
+            <div class="habit-right">
+              <span class="complete-btn" role="img" aria-label="Not completed today"></span>
             </div>
           </div>
-          <div class="check-badge">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 12L9 17L20 6" stroke="#0A0A0B" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div class="habit-progress">
+            <div class="day-labels" aria-hidden="true">
+              <span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span>
+            </div>
+            <div class="daily-grid anim" data-grid data-density="0.95" aria-hidden="true"></div>
           </div>
         </div>
-        <p class="goal-label">Goal: 5 / Week</p>
-        <div class="avatars" id="avatars"></div>
-      </div>
+      </article>
 
-      <div class="app-card red">
-        <div class="card-row">
-          <div style="display:flex; gap:12px; align-items:center;">
-            <div class="card-icon red">🏃</div>
-            <div>
-              <p class="card-title">Morning Run</p>
-              <p class="card-sub">63 day streak</p>
+      <!-- Large view: group habit (GroupHabitCard — group counter + gradual shading) -->
+      <article class="habit-card" style="--c:#F3A247; background:rgba(243,162,71,0.12);">
+        <div class="habit-content">
+          <div class="habit-top">
+            <div class="habit-left">
+              <div class="habit-icon"><span class="material-icons" aria-hidden="true">fitness_center</span></div>
+              <div class="habit-info">
+                <p class="habit-name">Gym Crew</p>
+                <p class="habit-desc">Mon / Wed / Fri</p>
+              </div>
+            </div>
+            <div class="habit-right">
+              <div class="stat group-stat">
+                <div class="stat-row">
+                  <span class="material-icons" aria-hidden="true">group</span>
+                  <span class="group-count">4 / 5</span>
+                </div>
+              </div>
+              <span class="complete-btn done" role="img" aria-label="Completed today">
+                <span class="material-icons" aria-hidden="true">check</span>
+              </span>
             </div>
           </div>
+          <div class="habit-progress">
+            <div class="day-labels" aria-hidden="true">
+              <span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span>
+            </div>
+            <div class="daily-grid anim" data-grid data-density="0.88" data-gradual="true" aria-hidden="true"></div>
+          </div>
         </div>
-        <div class="mini-grid red" id="heatmap"></div>
-      </div>
+      </article>
+
+      <!-- List view: compact card with the 7-day strip + streak -->
+      <article class="habit-card list-card" style="--c:#F04F4F; background:rgba(240,79,79,0.12);">
+        <div class="list-row">
+          <div class="list-left">
+            <div class="habit-icon"><span class="material-icons" aria-hidden="true">directions_run</span></div>
+            <div>
+              <p class="list-name">Morning Run</p>
+              <div class="week-strip" data-week="1,1,0,1,1,1,1" aria-hidden="true"></div>
+            </div>
+          </div>
+          <div class="list-right">
+            <div class="stat">
+              <div class="stat-row">
+                <span class="stat-num">63</span>
+                <span class="material-icons" aria-hidden="true">local_fire_department</span>
+              </div>
+              <span class="stat-label">DAYS</span>
+            </div>
+            <span class="complete-btn done" role="img" aria-label="Completed today">
+              <span class="material-icons" aria-hidden="true">check</span>
+            </span>
+          </div>
+        </div>
+      </article>
     </div>
   </section>
 
   <section class="features">
-    <div class="feature app-card green">
-      <div class="card-icon green">✅</div>
+    <div class="feature" style="--c:#8DC63F; background:rgba(141,198,63,0.12);">
+      <div class="habit-icon"><span class="material-icons" aria-hidden="true">check_circle</span></div>
       <h2>Mark it done, every day.</h2>
       <p>Daily, weekly, or whatever cadence fits. Miss a day and the streak just moves on — no lecture about it.</p>
-      <div class="mini-grid green" id="strip-1"></div>
+      <div class="strip anim" data-grid data-cols="13" data-rows="2" data-density="0.8" aria-hidden="true"></div>
     </div>
-    <div class="feature app-card orange">
-      <div class="card-icon orange">🤝</div>
+    <div class="feature" style="--c:#F3A247; background:rgba(243,162,71,0.12);">
+      <div class="habit-icon"><span class="material-icons" aria-hidden="true">group</span></div>
       <h2>Build it with your crew.</h2>
       <p>Start a group habit and everyone's check-ins land on the same grid, so you can see who's showing up.</p>
-      <div class="mini-grid orange" id="strip-2"></div>
+      <div class="strip anim" data-grid data-cols="13" data-rows="2" data-density="0.88" data-gradual="true" aria-hidden="true"></div>
     </div>
-    <div class="feature app-card red">
-      <div class="card-icon red">📊</div>
+    <div class="feature" style="--c:#F04F4F; background:rgba(240,79,79,0.12);">
+      <div class="habit-icon"><span class="material-icons" aria-hidden="true">insights</span></div>
       <h2>Watch the pattern form.</h2>
       <p>Every square is a day. Months in, the grid tells you exactly what you stuck with — and what you didn't.</p>
-      <div class="mini-grid red" id="strip-3"></div>
+      <div class="strip anim" data-grid data-cols="13" data-rows="2" data-density="0.76" aria-hidden="true"></div>
     </div>
   </section>
 </main>
@@ -338,48 +516,64 @@
 </footer>
 
 <script>
-  // Group card avatars
-  const members = [
-    { i: 'J', n: 'Jake', pct: 100 },
-    { i: 'M', n: 'Mia',  pct: 60  },
-    { i: 'A', n: 'Alex', pct: 80  },
-    { i: 'K', n: 'Kai',  pct: 40  },
-    { i: 'S', n: 'Sam',  pct: 100 },
-  ];
-  const avatarsEl = document.getElementById('avatars');
-  members.forEach(m => {
-    const col = document.createElement('div');
-    col.className = 'avatar-col';
-    col.innerHTML = `
-      <span class="avatar-count">${Math.round(m.pct / 20)}</span>
-      <div class="avatar-ring" style="--pct:${m.pct}">
-        <div class="inner">${m.i}</div>
-      </div>
-      <span class="avatar-name">${m.n}</span>
-    `;
-    avatarsEl.appendChild(col);
-  });
+  // The app's grids: 26 week-columns × 7 day-rows, Monday on top, today in the last
+  // column. Empty squares are rgba(255,255,255,0.10); filled ones use the habit colour,
+  // and gradual habits fade in at alpha 0.2 + 0.8 × ratio (see shared/HabitSquare.tsx).
+  const MIN_ALPHA = 0.2;
 
-  // Sparse heatmap grid (mostly unlit, a few lit squares) — matches the app's real density
-  function buildGrid(id, rows, cols, litChance, delayStep) {
-    const el = document.getElementById(id);
-    if (!el) return;
-    let i = 0;
+  // Grid row index of today: Monday = 0 … Sunday = 6.
+  const todayRow = (new Date().getDay() + 6) % 7;
+
+  function buildGrid(el) {
+    const cols = +el.dataset.cols || 26;
+    const rows = +el.dataset.rows || 7;
+    const density = +el.dataset.density || 0.7;
+    const gradual = el.dataset.gradual === 'true';
+    const isDaily = cols === 26;
+
+    const frag = document.createDocumentFragment();
     for (let r = 0; r < rows; r++) {
       for (let c = 0; c < cols; c++) {
         const sq = document.createElement('div');
-        sq.className = 'c' + (Math.random() < litChance ? ' lit' : '');
-        sq.style.setProperty('--d', (i * delayStep) + 's');
-        el.appendChild(sq);
-        i++;
+        sq.className = 'sq';
+
+        // Squares past today in the current week haven't happened yet.
+        const isFuture = isDaily && c === cols - 1 && r > todayRow;
+        // Weekly wave + a slow ramp so the habit visibly beds in over the 6 months.
+        const wave = 0.72 + 0.28 * Math.sin(c * 0.8 + r * 1.1);
+        const ramp = 0.7 + 0.3 * (c / (cols - 1));
+        const lit = !isFuture && Math.random() < density * wave * ramp;
+
+        if (lit) {
+          sq.classList.add('lit');
+          const ratio = gradual ? [0.25, 0.5, 0.75, 1, 1][Math.floor(Math.random() * 5)] : 1;
+          sq.style.setProperty('--o', MIN_ALPHA + (1 - MIN_ALPHA) * ratio);
+        } else {
+          sq.style.setProperty('--o', 1);
+        }
+        if (isDaily && c === cols - 1 && r === todayRow) sq.classList.add('today');
+
+        sq.style.setProperty('--d', ((r * cols + c) * 0.004) + 's');
+        frag.appendChild(sq);
       }
     }
+    el.appendChild(frag);
   }
 
-  buildGrid('heatmap', 6, 15, 0.12, 0.01);
-  buildGrid('strip-1', 2, 12, 0.22, 0.015);
-  buildGrid('strip-2', 2, 12, 0.22, 0.015);
-  buildGrid('strip-3', 2, 12, 0.22, 0.015);
+  document.querySelectorAll('[data-grid]').forEach(buildGrid);
+
+  // 7-day strip on the list card: weekday letters run up to today, which sits last.
+  const LETTERS = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+  document.querySelectorAll('[data-week]').forEach(el => {
+    const history = el.dataset.week.split(',').map(v => v.trim() === '1');
+    const today = new Date().getDay();
+    history.forEach((done, i) => {
+      const col = document.createElement('div');
+      col.className = 'day-col' + (i === 6 ? ' is-today' : '');
+      col.innerHTML = `<div class="sq${done ? ' lit' : ''}"></div><span>${LETTERS[(today - (6 - i) + 7) % 7]}</span>`;
+      el.appendChild(col);
+    });
+  });
 </script>
 
 </body>
