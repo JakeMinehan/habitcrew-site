@@ -94,6 +94,30 @@
     max-width: 42ch;
     margin: 0 0 28px;
   }
+  .hero-points {
+    font-size: 17px;
+    color: var(--muted);
+    max-width: 42ch;
+    margin: 0 0 28px;
+    padding: 0;
+    list-style: none;
+  }
+  .hero-points li {
+    position: relative;
+    padding-left: 22px;
+    margin-bottom: 10px;
+  }
+  .hero-points li:last-child { margin-bottom: 0; }
+  .hero-points li::before {
+    content: "";
+    position: absolute;
+    left: 4px;
+    top: 0.62em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--green);
+  }
 
   /* Store buttons */
   .cta-row {
@@ -375,8 +399,12 @@
   <section class="hero">
     <div class="hero-copy">
       <span class="eyebrow">Habit tracking, together</span>
-      <h1>Build streaks<br><span class="hl">with your crew.</span></h1>
-      <p>Track any habit solo, or start one with up to five friends and watch everyone's progress land on the same grid. Even track weekly and monthly habits as well.</p>
+      <h1>Build consistency<br><span class="hl">with your crew.</span></h1>
+      <ul class="hero-points">
+        <li>Track anything in groups up to 5 members (or solo!).</li>
+        <li>Compare progress to motivate each other.</li>
+        <li>Weekly and monthly habits are supported as well.</li>
+      </ul>
 
       <div class="cta-row">
         <a class="store-btn" href="https://apps.apple.com/au/app/habit-tracker-habitcrew/id6787154922" target="_blank" rel="noopener">
