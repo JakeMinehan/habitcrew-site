@@ -4,7 +4,62 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HabitCrew — Build streaks you don't do alone</title>
-<meta name="description" content="HabitCrew is a habit tracker you can build alone or with your crew. Track daily habits, see your streak form, and keep each other honest. Free on the App Store.">
+<meta name="description" content="HabitCrew is a habit tracker you can build alone or with your crew. Track daily habits, see your streak form, and keep each other honest. Free on the App Store and Google Play.">
+<link rel="canonical" href="https://habitcrew.co/">
+<!-- Safari on iPhone shows a native "Get" banner for the app. -->
+<meta name="apple-itunes-app" content="app-id=6787154922">
+<!-- Structured data: lets search engines and AI assistants read what the app is. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://habitcrew.co/#org",
+      "name": "HabitCrew",
+      "url": "https://habitcrew.co/",
+      "logo": "https://habitcrew.co/assets/app-icon.png",
+      "email": "support@habitcrew.co"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://habitcrew.co/#website",
+      "name": "HabitCrew",
+      "url": "https://habitcrew.co/",
+      "publisher": { "@id": "https://habitcrew.co/#org" }
+    },
+    {
+      "@type": "MobileApplication",
+      "@id": "https://habitcrew.co/#app",
+      "name": "HabitCrew",
+      "alternateName": "HabitCrew: Group Habit Tracker",
+      "description": "HabitCrew is a habit tracker for iPhone and Android where up to 5 friends share a habit, see each other's progress, chat, and nudge each other to stay on track. It supports solo habits and daily, weekly and monthly goals.",
+      "applicationCategory": "HealthApplication",
+      "applicationSubCategory": "Habit tracker",
+      "operatingSystem": "iOS, Android",
+      "url": "https://habitcrew.co/",
+      "image": "https://habitcrew.co/assets/app-icon.png",
+      "downloadUrl": [
+        "https://apps.apple.com/au/app/habit-tracker-habitcrew/id6787154922",
+        "https://play.google.com/store/apps/details?id=co.habitcrew.app"
+      ],
+      "sameAs": [
+        "https://apps.apple.com/au/app/habit-tracker-habitcrew/id6787154922",
+        "https://play.google.com/store/apps/details?id=co.habitcrew.app"
+      ],
+      "featureList": [
+        "Group habits with up to 5 members",
+        "Group progress rings and 12-week comparison graphs",
+        "A group chat for every group habit",
+        "Nudges to remind a teammate to complete a habit",
+        "Daily, weekly and monthly habit goals",
+        "Solo and private habits"
+      ],
+      "publisher": { "@id": "https://habitcrew.co/#org" }
+    }
+  ]
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -126,7 +181,7 @@
     gap: 12px;
     flex-wrap: wrap;
   }
-  .store-btn, .soon-panel {
+  .store-btn {
     display: inline-flex;
     align-items: center;
     gap: 11px;
@@ -143,12 +198,6 @@
   }
   .store-btn:hover, .store-btn:focus-visible { transform: translateY(-2px); }
   .store-btn svg { flex-shrink: 0; }
-  .soon-panel {
-    background: #141414;
-    border: 1px solid var(--rule);
-    color: var(--muted);
-  }
-  .soon-panel .material-icons { font-size: 26px; color: var(--muted); }
   .btn-lines { display: flex; flex-direction: column; line-height: 1.15; }
   .btn-lines small {
     font-size: 11px;
@@ -157,7 +206,6 @@
     opacity: 0.75;
   }
   .btn-lines strong { font-size: 18px; font-weight: 700; letter-spacing: 0.01em; }
-  .soon-panel .btn-lines strong { color: var(--white); }
 
   /* Material Icons — the same icon set the app renders through IconSymbol.
      Boxed to 1em so the ligature text never widens its container while the
@@ -327,33 +375,316 @@
     .store-btn { transition: none; }
   }
 
-  /* Features */
-  .features {
+  .hero-copy > p.hero-lead { margin-bottom: 20px; }
+
+  /* Closing download section */
+  .cta-block { text-align: center; }
+  .cta-block h2 {
+    font-size: clamp(32px, 4vw, 46px);
+    line-height: 1.1;
+    margin: 14px 0 14px;
+    color: var(--white);
+  }
+  .cta-block > p { font-size: 17px; color: var(--muted); max-width: 46ch; margin: 0 auto 28px; }
+  .cta-block .cta-row { justify-content: center; }
+  .cta-block .cta-faq { font-size: 15px; margin: 26px auto 0; }
+  .cta-faq a { color: var(--green); text-decoration: none; font-weight: 600; }
+  .cta-faq a:hover { text-decoration: underline; }
+
+  /* ── Feature blocks: one per feature, separated by rules ───────────────── */
+  .block {
     border-top: 1px solid var(--rule);
-    padding: 60px 0 72px;
+    padding: 96px 0;
+  }
+  .block-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: 64px;
+    align-items: center;
   }
-  .feature {
-    border-radius: 16px;
-    padding: 20px;
+  .block-grid > * { min-width: 0; }
+  .block-grid.flip { grid-template-columns: 1.15fr 0.85fr; }
+  .block-grid.flip > .block-copy { order: 2; }
+  .block-copy h2 {
+    font-size: clamp(30px, 3.6vw, 42px);
+    line-height: 1.1;
+    margin: 14px 0 18px;
+    color: var(--white);
   }
-  .feature .habit-icon { margin: 0 0 6px; }
-  .feature h2 {
-    font-size: 19px;
-    color: var(--text);
-    margin: 0 0 8px;
+  .block-copy h2 .hl { color: var(--green); }
+  .block-copy p {
+    font-size: 17px;
+    color: var(--muted);
+    max-width: 44ch;
+    margin: 0 0 22px;
   }
-  .feature p {
+  .block-copy .hero-points { margin-bottom: 0; }
+  .block-copy .hint {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     font-size: 14px;
     color: var(--muted);
-    margin: 0 0 18px;
+    margin: 4px 0 0;
   }
-  .feature .strip {
+  .block-copy .hint .material-icons { font-size: 18px; color: var(--green); }
+  .visual-stack { display: flex; flex-direction: column; gap: 16px; }
+
+  /* Shared card chrome for the Group View 1 / Graph View cards
+     (GroupHabitView1.tsx, HabitGraphCard.tsx): 12px radius, 10/12 padding. */
+  .app-card {
+    border-radius: 12px;
+    padding: 10px 12px;
+    background: color-mix(in srgb, var(--c) 12%, transparent);
+  }
+  .app-card .top-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .app-card .left { display: flex; align-items: center; min-width: 0; }
+  .app-card .habit-icon { margin-right: 8px; }
+  .app-card .habit-desc { margin-top: -2px; }
+  .app-card .habit-name { margin: 0; }
+  .card-sep {
+    height: 1px;
+    background: rgba(255,255,255,0.10);
+    margin: 8px 8px 4px;
+  }
+  .goal-text { font-size: 13px; font-weight: 700; color: var(--muted); margin: 0; }
+  .goal-text span { font-weight: 400; }
+  .graph-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin: 2px 0 8px;
+  }
+  .period-caption { font-size: 12px; font-weight: 600; color: var(--muted); flex-shrink: 0; }
+
+  /* GradualButton: segmented rounded-square ring with a "+" (buttons/GradualButton.tsx) */
+  .gradual-btn {
+    position: relative;
+    width: 40px; height: 40px;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .gradual-btn svg { position: absolute; inset: 0; }
+  .gradual-btn b { font-size: 22px; font-weight: 700; color: var(--c); line-height: 1; }
+
+  /* Group View 1: members ringed by their period progress */
+  .avatar-row {
     display: grid;
-    grid-template-columns: repeat(13, 1fr);
-    gap: 3px;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+    margin-top: 4px;
+  }
+  .av-col { display: flex; flex-direction: column; align-items: center; gap: 4px; min-width: 0; }
+  .av-count {
+    min-height: 20px;
+    font-size: 15px;
+    line-height: 20px;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .av-count.done { color: var(--c); }
+  .ring { position: relative; width: 100%; max-width: 76px; aspect-ratio: 1; }
+  .ring svg { position: absolute; inset: 0; width: 100%; height: 100%; transform: rotate(-90deg); }
+  .ring .arc { transition: stroke-dashoffset 1.1s cubic-bezier(.22,1,.36,1) var(--delay, 0s); }
+  .ring img {
+    position: absolute;
+    inset: 12.5%;
+    width: 75%; height: 75%;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+  }
+  .av-name {
+    font-size: 11px;
+    line-height: 16px;
+    color: var(--muted);
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* Line graphs (HabitCardGraph / GroupCompletionChart) are drawn into these by JS. */
+  .line-graph { position: relative; width: 100%; }
+  .line-graph svg { display: block; overflow: visible; }
+  .axis-row { position: relative; width: 100%; height: 26px; margin-top: 4px; }
+  .axis-label {
+    position: absolute;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 10px;
+    line-height: 13px;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .axis-label small { font-size: 9px; line-height: 12px; color: #6B7280; margin-top: -1px; }
+  .axis-label.now, .axis-label.now small { font-weight: 700; }
+
+  /* Group Progress chart on the full habit page (chartCard + GroupCompletionChart) */
+  .chart-card {
+    border-radius: 12px;
+    padding: 16px;
+    background: rgba(255,255,255,0.06);
+  }
+  .chart-title {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: -2px 0 14px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .chart-title .material-icons { font-size: 24px; color: var(--c); }
+  .chart-title .tag {
+    margin-left: auto;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    padding: 3px 10px;
+  }
+  .readout { display: flex; align-items: flex-start; gap: 20px; margin-bottom: 12px; }
+  .readout-value { font-size: 24px; font-weight: 700; line-height: 30px; color: #FFFFFF; }
+  .readout-label { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .readout-range {
+    flex: 1;
+    text-align: right;
+    margin-top: 6px;
+    padding-right: 4px;
+    font-size: 17px;
+    font-weight: 600;
+    color: #FFFFFF;
+    white-space: nowrap;
+  }
+  .chart-sub { font-size: 12px; font-weight: 600; color: var(--muted); margin: 0 0 8px; }
+  .scrub { cursor: crosshair; touch-action: pan-y; }
+  .selector {
+    display: flex;
+    gap: 14px;
+    margin-top: 18px;
+    padding: 4px 2px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .selector::-webkit-scrollbar { display: none; }
+  .sel-item {
+    flex-shrink: 0;
+    width: 62px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: none;
+    border: 0;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    color: inherit;
+  }
+  .sel-ring {
+    width: 54px; height: 54px;
+    border-radius: 50%;
+    border: 2.5px solid transparent;
+    display: flex; align-items: center; justify-content: center;
+    transition: border-color 0.2s ease, transform 0.15s ease;
+  }
+  .sel-item:hover .sel-ring { transform: translateY(-2px); }
+  .sel-item.active .sel-ring { border-color: var(--c); }
+  .sel-ring img, .sel-ring .group-av {
+    width: 46px; height: 46px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+  }
+  .sel-ring .group-av {
+    background: #2A2D2E;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .sel-ring .group-av .material-icons { font-size: 22px; color: #FFFFFF; }
+  .sel-label { font-size: 11px; color: var(--muted); margin-top: 5px; transition: color 0.2s ease; }
+  .sel-item.active .sel-label { color: #FFFFFF; }
+  .sel-item:focus-visible { outline: none; }
+  .sel-item:focus-visible .sel-ring { outline: 2px solid var(--green); outline-offset: 2px; }
+
+  /* Chat + nudge demo: the Remotion clip in a CSS phone frame */
+  .phone-wrap { display: flex; justify-content: center; position: relative; }
+  .phone {
+    width: min(100%, 330px);
+    padding: 10px;
+    border-radius: 48px;
+    background: linear-gradient(145deg, #3A3D40, #121314 40%, #26292B);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.5), inset 0 0 0 1.5px rgba(255,255,255,0.12);
+  }
+  .phone video {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1 / 2;
+    border-radius: 38px;
+    background: #151718;
+    object-fit: cover;
+  }
+  .notif {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    max-width: 380px;
+    padding: 12px 14px;
+    margin-top: 28px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid var(--rule);
+    backdrop-filter: blur(12px);
+  }
+  .notif img { width: 38px; height: 38px; border-radius: 9px; flex-shrink: 0; }
+  .notif-body { min-width: 0; flex: 1; }
+  .notif-top { display: flex; justify-content: space-between; gap: 8px; font-size: 14px; font-weight: 600; color: var(--text); }
+  .notif-top span { font-weight: 400; font-size: 12px; color: var(--muted); }
+  .notif-text { font-size: 14px; color: #D3D5D7; margin: 1px 0 0; line-height: 1.35; }
+
+  /* Weekly / Monthly grids (grids/WeeklyGrid.tsx, grids/MonthlyGrid.tsx):
+     fixed 29px cells, 4px gaps; scrolls on narrow screens from the newest column. */
+  .grid-scroll {
+    overflow-x: auto;
+    margin: 6px 0 2px;
+    scrollbar-width: none;
+  }
+  .grid-scroll::-webkit-scrollbar { display: none; }
+  .grid-inner { width: max-content; margin: 0 auto; display: flex; gap: 6px; }
+  /* Weekly: the Wk1–Wk5 column stays pinned while the months scroll. */
+  .grid-row { display: flex; gap: 6px; width: max-content; max-width: 100%; margin: 6px auto 2px; }
+  .grid-row .grid-scroll { margin: 0; min-width: 0; }
+  .wk-col { display: flex; flex-direction: column; gap: 4px; padding-top: 20px; flex-shrink: 0; }
+  .wk-col span {
+    width: 24px; height: 29px;
+    font-size: 10px; line-height: 29px; text-align: right;
+    color: rgba(255,255,255,0.5);
+  }
+  .period-grid { display: flex; flex-direction: column; gap: 4px; }
+  .month-labels, .period-cols { display: flex; gap: 4px; }
+  .month-labels span {
+    width: 29px; height: 16px;
+    font-size: 12px; line-height: 16px; text-align: center;
+    color: rgba(255,255,255,0.5);
+  }
+  .period-col { display: flex; flex-direction: column; gap: 4px; }
+  .cell { width: 29px; height: 29px; border-radius: 7px; background: var(--empty); }
+  .cell.blank { background: none; }
+  .cell.now { box-shadow: inset 0 0 0 1px rgba(255,255,255,0.3); }
+  .anim-cells .cell:not(.blank) { opacity: 0; transition: opacity 0.4s ease var(--d, 0s); }
+  .anim-cells.in .cell:not(.blank) { opacity: 1; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ring .arc { transition: none; }
+    .anim-cells .cell:not(.blank) { opacity: 1; transition: none; }
   }
 
   /* Footer */
@@ -378,8 +709,20 @@
 
   @media (max-width: 860px) {
     .hero { grid-template-columns: 1fr; padding: 44px 0 52px; gap: 32px; }
-    .features { grid-template-columns: 1fr; gap: 18px; padding: 44px 0 52px; }
+    .block { padding: 60px 0; }
+    .block-grid, .block-grid.flip { grid-template-columns: 1fr; gap: 36px; }
+    .block-grid.flip > .block-copy { order: 0; }
     footer { flex-direction: column; align-items: flex-start; }
+  }
+  @media (max-width: 480px) {
+    /* Fit all five members + Group without a hidden scroll. */
+    .selector { gap: 4px; justify-content: space-between; }
+    .sel-item { width: auto; flex: 1 1 0; min-width: 0; }
+    .sel-ring { width: 46px; height: 46px; }
+    .sel-ring img, .sel-ring .group-av { width: 38px; height: 38px; }
+    .chart-card { padding: 14px 12px; }
+    .readout { gap: 16px; }
+    .readout-range { font-size: 15px; }
   }
   @media (max-width: 420px) {
     .day-col .sq { width: 16px; height: 16px; border-radius: 5px; }
@@ -400,6 +743,7 @@
     <div class="hero-copy">
       <span class="eyebrow">Habit tracking, together</span>
       <h1>Build consistency<br><span class="hl">with your crew.</span></h1>
+      <p class="hero-lead">HabitCrew is a habit tracker for iPhone and Android where you and up to 4 friends share a habit, see each other's progress, and nudge each other to stay on track.</p>
       <ul class="hero-points">
         <li>Track anything in groups up to 5 members (or solo!)</li>
         <li>Compare progress to motivate each other</li>
@@ -417,13 +761,15 @@
           </span>
         </a>
 
-        <div class="soon-panel">
-          <span class="material-icons" aria-hidden="true">android</span>
+        <a class="store-btn" href="https://play.google.com/store/apps/details?id=co.habitcrew.app" target="_blank" rel="noopener">
+          <svg width="24" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M22.018 13.298l-3.919 2.218-3.515-3.493 3.543-3.521 3.891 2.202a1.49 1.49 0 0 1 0 2.594zM1.337.924a1.486 1.486 0 0 0-.112.568v21.017c0 .217.045.419.124.6l11.155-11.087L1.337.924zm12.207 10.065l3.258-3.238L3.45.195a1.466 1.466 0 0 0-.946-.179l11.04 10.973zm0 2.067l-11 10.933c.298.036.612-.016.906-.183l13.324-7.54-3.23-3.21z"/>
+          </svg>
           <span class="btn-lines">
-            <small>Coming soon to</small>
-            <strong>Android</strong>
+            <small>Get it on</small>
+            <strong>Google Play</strong>
           </span>
-        </div>
+        </a>
       </div>
     </div>
 
@@ -511,31 +857,202 @@
     </div>
   </section>
 
-  <section class="features">
-    <div class="feature" style="--c:#8DC63F; background:rgba(141,198,63,0.12);">
-      <div class="habit-icon"><span class="material-icons" aria-hidden="true">check_circle</span></div>
-      <h2>Mark it done, every day.</h2>
-      <p>Daily, weekly, or whatever cadence fits. Miss a day and the streak just moves on — no lecture about it.</p>
-      <div class="strip anim" data-grid data-cols="13" data-rows="2" data-density="0.8" aria-hidden="true"></div>
+  <!-- ── 1. Group habits: Group View 1 + Graph View cards (Group Progress tab) ── -->
+  <section class="block" id="group-habits">
+    <div class="block-grid">
+      <div class="block-copy">
+        <span class="eyebrow">Group habits</span>
+        <h2>Track Group Habits</h2>
+        <p>Habits stick when someone's counting on you. Share a habit with up to 5 friends and everyone's progress lands in one place, so a skipped session gets noticed and a good week gets seen.</p>
+        <ul class="hero-points">
+          <li>Accountability you can't get tracking solo</li>
+          <li>A little friendly competition</li>
+          <li>See everyone's progress at a glance</li>
+        </ul>
+      </div>
+
+      <div class="visual-stack">
+        <!-- Group View 1 (GroupHabitView1.tsx): each member ringed by this period's progress -->
+        <article class="app-card" style="--c:#06B6D4;">
+          <div class="top-row">
+            <div class="left">
+              <div class="habit-icon"><span class="material-icons" aria-hidden="true">directions_run</span></div>
+              <div class="habit-info">
+                <p class="habit-name">Morning Run</p>
+                <p class="habit-desc">Run 3km before work</p>
+              </div>
+            </div>
+            <span data-gradual-btn="3/3"></span>
+          </div>
+          <div class="card-sep"></div>
+          <p class="goal-text">Goal: 3 / Week<span> (~0.4 / Day)</span></p>
+          <div class="avatar-row" data-target="3"
+               data-members='[["jake",3],["maya",3],["lucy",2],["leo",1],["sam",0]]'></div>
+        </article>
+
+        <!-- Graph View (HabitGraphCard.tsx, group variant): your line in colour, the crew in grey -->
+        <article class="app-card" style="--c:#8DC63F;">
+          <div class="top-row">
+            <div class="left">
+              <div class="habit-icon"><span class="material-icons" aria-hidden="true">self_improvement</span></div>
+              <div class="habit-info">
+                <p class="habit-name">Meditate</p>
+                <p class="habit-desc">10 minutes of calm</p>
+              </div>
+            </div>
+            <span data-gradual-btn="3/5"></span>
+          </div>
+          <div class="card-sep"></div>
+          <div class="graph-head">
+            <p class="goal-text">Goal: 5 / Week<span> (~0.7 / Day)</span></p>
+            <span class="period-caption">Past 12 Weeks</span>
+          </div>
+          <div class="line-graph reveal" id="card-graph" role="img" aria-label="Your Meditate completions over the past 12 weeks, with the rest of the group in grey"></div>
+          <div class="axis-row" id="card-axis" aria-hidden="true"></div>
+        </article>
+      </div>
     </div>
-    <div class="feature" style="--c:#F3A247; background:rgba(243,162,71,0.12);">
-      <div class="habit-icon"><span class="material-icons" aria-hidden="true">group</span></div>
-      <h2>Build it with your crew.</h2>
-      <p>Start a group habit and everyone's check-ins land on the same grid, so you can see who's showing up.</p>
-      <div class="strip anim" data-grid data-cols="13" data-rows="2" data-density="0.88" data-gradual="true" aria-hidden="true"></div>
+  </section>
+
+  <!-- ── 2. Interactive Group Progress chart (full habit page → Group Progress) ── -->
+  <section class="block" id="compare">
+    <div class="block-grid flip">
+      <div class="block-copy">
+        <span class="eyebrow">Group progress</span>
+        <h2>See Who's Showing Up</h2>
+        <p>Open any group habit to see the last 12 weeks for the whole crew. Tap a teammate to bring their line to the front, or tap Group to see how you're doing together.</p>
+        <p class="hint"><span class="material-icons" aria-hidden="true">touch_app</span>Try it: tap an avatar or drag across the graph</p>
+      </div>
+
+      <div class="chart-card" id="group-chart" style="--c:#8DC63F;">
+        <div class="chart-title">
+          <span class="material-icons" aria-hidden="true">self_improvement</span>Meditate
+          <span class="tag">Group Progress</span>
+        </div>
+        <div class="readout" aria-live="polite">
+          <div><div class="readout-value" data-count>0</div><div class="readout-label" data-count-label>completions</div></div>
+          <div><div class="readout-value" data-rate>0%</div><div class="readout-label">completion rate</div></div>
+          <div class="readout-range" data-range>This week</div>
+        </div>
+        <p class="chart-sub">Past 12 Weeks</p>
+        <div class="line-graph scrub reveal" data-graph></div>
+        <div class="axis-row" data-axis aria-hidden="true" style="margin-top:6px"></div>
+        <div class="selector" data-selector role="group" aria-label="Choose whose progress to highlight"></div>
+      </div>
     </div>
-    <div class="feature" style="--c:#F04F4F; background:rgba(240,79,79,0.12);">
-      <div class="habit-icon"><span class="material-icons" aria-hidden="true">insights</span></div>
-      <h2>Watch the pattern form.</h2>
-      <p>Every square is a day. Months in, the grid tells you exactly what you stuck with — and what you didn't.</p>
-      <div class="strip anim" data-grid data-cols="13" data-rows="2" data-density="0.76" aria-hidden="true"></div>
+  </section>
+
+  <!-- ── 3. Chat + nudges (clip rendered with Remotion) ── -->
+  <section class="block" id="chat">
+    <div class="block-grid">
+      <div class="block-copy">
+        <span class="eyebrow">Chat &amp; nudges</span>
+        <h2>Motivate Teammates with Chat and Nudges</h2>
+        <p>Every group habit comes with its own group chat, so you can celebrate a 6am run or talk each other into tomorrow's, right next to your progress.</p>
+        <p>Someone falling behind? Send them a nudge and they'll get a reminder to finish the habit, straight from you.</p>
+        <div class="notif" role="img" aria-label="Example nudge notification: jake nudged you to complete Morning Run">
+          <img src="assets/app-icon.png" alt="" width="38" height="38">
+          <div class="notif-body">
+            <div class="notif-top">Morning Run <span>now</span></div>
+            <p class="notif-text">jake nudged you to complete "Morning Run"</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="phone-wrap">
+        <div class="phone">
+          <video autoplay muted loop playsinline preload="auto" poster="assets/chat-nudge-poster.jpg"
+                 aria-label="Demo: the Morning Run group chat, then nudging sam from the members list">
+            <source src="assets/chat-nudge.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
     </div>
+  </section>
+
+  <!-- ── 4. Weekly + monthly habits (My Progress, Grid View) ── -->
+  <section class="block" id="weekly-monthly">
+    <div class="block-grid flip">
+      <div class="block-copy">
+        <span class="eyebrow">Flexible goals</span>
+        <h2>Weekly and Monthly Habits</h2>
+        <p>Tired of habit trackers that only track daily habits? With HabitCrew you can set a goal over a week or a month, like three gym sessions a week or two books a month, so it fits your schedule.</p>
+      </div>
+
+      <div class="visual-stack">
+        <!-- Grid View, weekly habit (WeeklyGrid.tsx): 12 months × Wk1–Wk5 -->
+        <article class="habit-card" style="--c:#6C63D8; background:rgba(108,99,216,0.12);">
+          <div class="habit-content">
+            <div class="habit-top">
+              <div class="habit-left">
+                <div class="habit-icon"><span class="material-icons" aria-hidden="true">fitness_center</span></div>
+                <div class="habit-info">
+                  <p class="habit-name">Gym</p>
+                  <p class="habit-desc">3 sessions a week</p>
+                </div>
+              </div>
+              <div class="habit-right"><span data-gradual-btn="2/3"></span></div>
+            </div>
+            <div class="grid-row" aria-hidden="true">
+              <div class="wk-col"><span>Wk1</span><span>Wk2</span><span>Wk3</span><span>Wk4</span><span>Wk5</span></div>
+              <div class="grid-scroll"><div class="grid-inner anim-cells" data-weekly-grid data-target="3"></div></div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Grid View, monthly habit (MonthlyGrid.tsx): last 12 months -->
+        <article class="habit-card" style="--c:#F3A247; background:rgba(243,162,71,0.12);">
+          <div class="habit-content">
+            <div class="habit-top">
+              <div class="habit-left">
+                <div class="habit-icon"><span class="material-icons" aria-hidden="true">menu_book</span></div>
+                <div class="habit-info">
+                  <p class="habit-name">Read 2 Books</p>
+                  <p class="habit-desc">2 books a month</p>
+                </div>
+              </div>
+              <div class="habit-right"><span data-gradual-btn="1/2"></span></div>
+            </div>
+            <div class="grid-scroll"><div class="grid-inner anim-cells" data-monthly-grid data-target="2" aria-hidden="true"></div></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Closing download call to action ── -->
+  <section class="block cta-block" id="download">
+    <span class="eyebrow">Get started</span>
+    <h2>Start your crew today.</h2>
+    <p>Download HabitCrew, create a habit, and invite up to 4 friends to build it with you.</p>
+    <div class="cta-row">
+      <a class="store-btn" href="https://apps.apple.com/au/app/habit-tracker-habitcrew/id6787154922" target="_blank" rel="noopener">
+        <svg width="26" height="30" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.53 4.08zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
+        </svg>
+        <span class="btn-lines">
+          <small>Download on the</small>
+          <strong>App Store</strong>
+        </span>
+      </a>
+      <a class="store-btn" href="https://play.google.com/store/apps/details?id=co.habitcrew.app" target="_blank" rel="noopener">
+        <svg width="24" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M22.018 13.298l-3.919 2.218-3.515-3.493 3.543-3.521 3.891 2.202a1.49 1.49 0 0 1 0 2.594zM1.337.924a1.486 1.486 0 0 0-.112.568v21.017c0 .217.045.419.124.6l11.155-11.087L1.337.924zm12.207 10.065l3.258-3.238L3.45.195a1.466 1.466 0 0 0-.946-.179l11.04 10.973zm0 2.067l-11 10.933c.298.036.612-.016.906-.183l13.324-7.54-3.23-3.21z"/>
+        </svg>
+        <span class="btn-lines">
+          <small>Get it on</small>
+          <strong>Google Play</strong>
+        </span>
+      </a>
+    </div>
+    <p class="cta-faq">Got questions? <a href="/faq">Read the FAQ</a></p>
   </section>
 </main>
 
 <footer class="wrap">
   <div class="foot-left">© 2026 HabitCrew</div>
   <nav class="foot-links">
+    <a href="/faq">FAQ</a>
     <a href="/privacy">Privacy Policy</a>
     <a href="/terms">Terms of Service</a>
     <a href="/support">Support</a>
@@ -601,6 +1118,342 @@
       col.innerHTML = `<div class="sq${done ? ' lit' : ''}"></div><span>${LETTERS[(today - (6 - i) + 7) % 7]}</span>`;
       el.appendChild(col);
     });
+  });
+
+  // ── Feature blocks ──────────────────────────────────────────────────────────
+  const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  const avatarSrc = name => `assets/avatars/${name}.jpg`;
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function hexToRgba(hex, a) {
+    const n = parseInt(hex.slice(1), 16);
+    return `rgba(${(n >> 16) & 255}, ${(n >> 8) & 255}, ${n & 255}, ${a})`;
+  }
+
+  // Small seeded PRNG so the demo grids look the same on every visit.
+  function seeded(seed) {
+    return () => {
+      seed = (seed + 0x6D2B79F5) | 0;
+      let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+
+  // Run `fn` once, the first time `el` scrolls into view.
+  function onReveal(el, fn) {
+    if (reduceMotion || !('IntersectionObserver' in window)) { fn(); return; }
+    const io = new IntersectionObserver(entries => {
+      if (entries.some(e => e.isIntersecting)) { io.disconnect(); fn(); }
+    }, { threshold: 0.3 });
+    io.observe(el);
+  }
+
+  // GradualButton: rounded-square path from top-centre, clockwise; one segment per
+  // unit of target (3px gaps), filled segments in the habit colour, "+" in the middle.
+  // A completed period swaps to the solid tick button, like the app.
+  const GB_PATH = 'M 20 2 L 30 2 A 8 8 0 0 1 38 10 L 38 30 A 8 8 0 0 1 30 38 L 10 38 A 8 8 0 0 1 2 30 L 2 10 A 8 8 0 0 1 10 2 L 20 2';
+  const GB_PERIMETER = 4 * 20 + 2 * Math.PI * 8;
+  document.querySelectorAll('[data-gradual-btn]').forEach(el => {
+    const [value, target] = el.dataset.gradualBtn.split('/').map(Number);
+    if (value >= target) {
+      el.outerHTML = `<span class="complete-btn done" role="img" aria-label="Goal met this period"><span class="material-icons" aria-hidden="true">check</span></span>`;
+      return;
+    }
+    const seg = (GB_PERIMETER - target * 3) / target;
+    const fg = value > 0 ? `${Array(value).fill(`${seg} 3`).join(' ')} 0 ${GB_PERIMETER}` : `0 ${GB_PERIMETER}`;
+    el.outerHTML =
+      `<span class="gradual-btn" role="img" aria-label="${value} of ${target} done">` +
+      `<svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true">` +
+      `<path d="${GB_PATH}" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="4" stroke-dasharray="${seg} 3"/>` +
+      `<path d="${GB_PATH}" fill="none" style="stroke:var(--c)" stroke-width="4" stroke-dasharray="${fg}"/>` +
+      `</svg><b aria-hidden="true">+</b></span>`;
+  });
+
+  // Group View 1 avatar row: count above, progress ring round the photo, name below.
+  document.querySelectorAll('[data-members]').forEach(row => {
+    const target = +row.dataset.target;
+    const R = 29.5, CIRC = 2 * Math.PI * R;
+    row.innerHTML = JSON.parse(row.dataset.members).map(([name, value], i) => {
+      const fraction = Math.min(1, value / target);
+      const arc = fraction > 0
+        ? `<circle class="arc" cx="32" cy="32" r="${R}" fill="none" stroke-width="5" stroke-linecap="round"
+             style="stroke:var(--c); --delay:${i * 0.08}s" stroke-dasharray="${CIRC}" stroke-dashoffset="${CIRC}"
+             data-offset="${CIRC * (1 - fraction)}"/>`
+        : '';
+      return `<div class="av-col">
+          <span class="av-count${value >= target ? ' done' : ''}">${value}</span>
+          <div class="ring">
+            <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="${R}" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="5"/>${arc}</svg>
+            <img src="${avatarSrc(name)}" alt="" loading="lazy" width="48" height="48">
+          </div>
+          <span class="av-name">${name}</span>
+        </div>`;
+    }).join('');
+    row.setAttribute('role', 'img');
+    row.setAttribute('aria-label', 'This week: ' + JSON.parse(row.dataset.members).map(([n, v]) => `${n} ${v} of ${target}`).join(', '));
+    onReveal(row, () => row.querySelectorAll('.arc').forEach(a => { a.style.strokeDashoffset = a.dataset.offset; }));
+  });
+
+  // ── 12-week line graphs ─────────────────────────────────────────────────────
+  // Same geometry as the app's gifted-charts setup: 95px plot, 4 dotted sections,
+  // points inset by their radius, area fill fading 0.35 → 0.02, grey member lines.
+  const GRAPH_H = 95;
+  const GREY_LINE = 'rgba(255,255,255,0.18)';
+
+  // Monday-anchored weeks, oldest → this week. "Wk3" is the week's index in its own month.
+  const thisMonday = (() => {
+    const d = new Date();
+    d.setHours(0, 0, 0, 0);
+    d.setDate(d.getDate() - ((d.getDay() + 6) % 7));
+    return d;
+  })();
+  const WEEKS = Array.from({ length: 12 }, (_, i) => {
+    const start = new Date(thisMonday);
+    start.setDate(start.getDate() - (11 - i) * 7);
+    const end = new Date(start);
+    end.setDate(end.getDate() + 6);
+    const sm = MONTHS[start.getMonth()], em = MONTHS[end.getMonth()];
+    return {
+      top: `Wk${Math.floor((start.getDate() - 1) / 7) + 1}`,
+      bottom: sm,
+      now: i === 11,
+      range: sm === em ? `${sm} ${start.getDate()} – ${end.getDate()}` : `${sm} ${start.getDate()} – ${em} ${end.getDate()}`,
+    };
+  });
+  // Every second week is labelled, anchored on the current week (computeSparseWeeklyAxisLabels).
+  const STACKED = WEEKS.map((w, i) => ((11 - i) % 2 === 0 ? w : null));
+
+  let gradientId = 0;
+  function drawGraph(el, { values, grey = [], color, max, point, active, strip = false }) {
+    const w = el.clientWidth;
+    if (!w) return null;
+    const n = values.length;
+    const inset = point / 2;
+    const spacing = (w - inset * 2) / (n - 1);
+    const x = i => inset + i * spacing;
+    const y = v => GRAPH_H - (v / max) * GRAPH_H;
+    const line = vals => vals.map((v, i) => `${i ? 'L' : 'M'}${x(i).toFixed(1)} ${y(v).toFixed(1)}`).join(' ');
+    const id = `area-${++gradientId}`;
+
+    let svg = `<svg width="${w}" height="${GRAPH_H}" viewBox="0 0 ${w} ${GRAPH_H}" aria-hidden="true">
+      <defs><linearGradient id="${id}" x1="0" y1="0" x2="0" y2="${GRAPH_H}" gradientUnits="userSpaceOnUse">
+        <stop offset="0" stop-color="${color}" stop-opacity="0.35"/><stop offset="1" stop-color="${color}" stop-opacity="0.02"/>
+      </linearGradient></defs>`;
+    for (let s = 1; s <= 4; s++) {
+      const ry = GRAPH_H - (s / 4) * GRAPH_H;
+      svg += `<line x1="0" x2="${w}" y1="${ry}" y2="${ry}" stroke="rgba(255,255,255,0.10)" stroke-dasharray="2 4"/>`;
+    }
+    svg += `<line x1="0" x2="${w}" y1="${GRAPH_H - 0.5}" y2="${GRAPH_H - 0.5}" stroke="rgba(255,255,255,0.15)"/>`;
+    grey.forEach(g => { svg += `<path d="${line(g)}" fill="none" stroke="${GREY_LINE}" stroke-width="1.5" stroke-linejoin="round"/>`; });
+    svg += `<path d="${line(values)} L${x(n - 1)} ${GRAPH_H} L${x(0)} ${GRAPH_H} Z" fill="url(#${id})"/>`;
+    if (strip) svg += `<line x1="${x(active)}" x2="${x(active)}" y1="0" y2="${GRAPH_H}" stroke="#FFFFFF" stroke-opacity="0.35"/>`;
+    svg += `<path d="${line(values)}" fill="none" stroke="${color}" stroke-width="2" stroke-linejoin="round"/>`;
+    values.forEach((v, i) => {
+      svg += `<circle cx="${x(i)}" cy="${y(v)}" r="${point / 2 - 1}" stroke="${color}" stroke-width="2" fill="${i === active ? color : '#151718'}"/>`;
+    });
+    el.innerHTML = svg + '</svg>';
+    return { w, inset, spacing };
+  }
+
+  // Two-line "Wk3 / Oct" axis labels, boxes clamped to the point spacing and the row.
+  function drawAxis(el, geo) {
+    if (!geo) return;
+    const box = Math.max(18, Math.min(34, geo.spacing));
+    el.innerHTML = STACKED.map((l, i) => {
+      if (!l) return '';
+      const left = Math.min(Math.max(geo.inset + i * geo.spacing - box / 2, 0), geo.w - box);
+      return `<div class="axis-label${l.now ? ' now' : ''}" style="width:${box}px; left:${left}px">${l.top}<small>${l.bottom}</small></div>`;
+    }).join('');
+  }
+
+  // Left-to-right wipe the first time a graph scrolls into view.
+  function revealGraph(el) {
+    if (reduceMotion) return;
+    const svg = el.querySelector('svg');
+    if (!svg) return;
+    svg.animate(
+      [{ clipPath: 'inset(-12px 100% -12px -12px)' }, { clipPath: 'inset(-12px -12px -12px -12px)' }],
+      { duration: 1200, easing: 'cubic-bezier(.22,1,.36,1)' }
+    );
+  }
+
+  // Meditate (target 5 / week) — completions per week, oldest → this week. jake is "you".
+  const CREW = [
+    { name: 'jake',  weeks: [3, 2, 4, 5, 2, 3, 1, 4, 6, 3, 4, 3] },
+    { name: 'maya',  weeks: [5, 6, 4, 5, 6, 5, 3, 5, 5, 6, 5, 5] },
+    { name: 'lizzy', weeks: [4, 4, 5, 3, 5, 4, 5, 6, 4, 5, 3, 4] },
+    { name: 'leo',   weeks: [2, 3, 1, 0, 3, 4, 2, 3, 1, 2, 4, 3] },
+    { name: 'sam',   weeks: [1, 0, 2, 3, 1, 1, 0, 2, 4, 1, 2, 1] },
+  ];
+  const MEDITATE_TARGET = 5;
+  const GREEN = '#8DC63F';
+  const memberMax = Math.max(1, ...CREW.flatMap(m => m.weeks));
+
+  // Graph View card: your line highlighted, newest point filled, crew in grey.
+  const cardGraph = document.getElementById('card-graph');
+  const cardAxis = document.getElementById('card-axis');
+  function renderCardGraph() {
+    drawAxis(cardAxis, drawGraph(cardGraph, {
+      values: CREW[0].weeks,
+      grey: CREW.slice(1).map(m => m.weeks),
+      color: GREEN, max: memberMax, point: 8, active: 11,
+    }));
+  }
+
+  // Full-page Group Progress chart: readout, scrubbable graph, member selector + Group.
+  const chart = document.getElementById('group-chart');
+  const chartGraph = chart.querySelector('[data-graph]');
+  const chartAxis = chart.querySelector('[data-axis]');
+  const selector = chart.querySelector('[data-selector]');
+  const COMBINED = '__group__';
+  const combined = {
+    values: WEEKS.map((_, i) => CREW.reduce((s, m) => s + m.weeks[i], 0)),
+    rates: WEEKS.map((_, i) => Math.min(100, CREW.reduce((s, m) => s + Math.min(m.weeks[i], MEDITATE_TARGET), 0) / (CREW.length * MEDITATE_TARGET) * 100)),
+  };
+  let activeKey = CREW[0].name;
+  let activeWeek = 11;
+  let chartGeo = null;
+
+  selector.innerHTML = CREW.map(m => `
+      <button class="sel-item" type="button" data-key="${m.name}" aria-pressed="false">
+        <span class="sel-ring"><img src="${avatarSrc(m.name)}" alt="" loading="lazy" width="46" height="46"></span>
+        <span class="sel-label">${m.name}</span>
+      </button>`).join('') + `
+      <button class="sel-item" type="button" data-key="${COMBINED}" aria-pressed="false">
+        <span class="sel-ring"><span class="group-av"><span class="material-icons" aria-hidden="true">groups</span></span></span>
+        <span class="sel-label">Group</span>
+      </button>`;
+
+  function renderChart() {
+    const isCombined = activeKey === COMBINED;
+    const member = CREW.find(m => m.name === activeKey);
+    const values = isCombined ? combined.values : member.weeks;
+    const count = values[activeWeek];
+    const rate = isCombined ? combined.rates[activeWeek] : Math.min(100, count / MEDITATE_TARGET * 100);
+
+    chart.querySelector('[data-count]').textContent = count;
+    chart.querySelector('[data-count-label]').textContent = count === 1 ? 'completion' : 'completions';
+    chart.querySelector('[data-rate]').textContent = `${Math.round(rate)}%`;
+    chart.querySelector('[data-range]').textContent = activeWeek === 11 ? 'This week' : WEEKS[activeWeek].range;
+
+    chartGeo = drawGraph(chartGraph, {
+      values,
+      grey: isCombined ? [] : CREW.filter(m => m !== member).map(m => m.weeks),
+      color: GREEN,
+      max: isCombined ? Math.max(1, ...combined.values) : memberMax,
+      point: 10, active: activeWeek, strip: true,
+    });
+    drawAxis(chartAxis, chartGeo);
+    chartGraph.setAttribute('role', 'img');
+    chartGraph.setAttribute('aria-label', `${isCombined ? 'Whole group' : activeKey}: ${count} completions, ${Math.round(rate)}% completion rate, ${activeWeek === 11 ? 'this week' : WEEKS[activeWeek].range}`);
+
+    selector.querySelectorAll('.sel-item').forEach(b => {
+      const on = b.dataset.key === activeKey;
+      b.classList.toggle('active', on);
+      b.setAttribute('aria-pressed', on);
+    });
+  }
+
+  selector.addEventListener('click', e => {
+    const btn = e.target.closest('.sel-item');
+    if (!btn || btn.dataset.key === activeKey) return;
+    activeKey = btn.dataset.key;
+    activeWeek = 11;
+    renderChart();
+  });
+
+  // Tap or drag across the graph to scrub weeks; a mouse scrubs on hover too.
+  function scrubTo(clientX) {
+    if (!chartGeo) return;
+    const x = clientX - chartGraph.getBoundingClientRect().left;
+    const i = Math.min(11, Math.max(0, Math.round((x - chartGeo.inset) / chartGeo.spacing)));
+    if (i !== activeWeek) { activeWeek = i; renderChart(); }
+  }
+  let scrubbing = false;
+  chartGraph.addEventListener('pointerdown', e => { scrubbing = true; chartGraph.setPointerCapture(e.pointerId); scrubTo(e.clientX); });
+  chartGraph.addEventListener('pointermove', e => { if (scrubbing || e.pointerType === 'mouse') scrubTo(e.clientX); });
+  ['pointerup', 'pointercancel'].forEach(t => chartGraph.addEventListener(t, () => { scrubbing = false; }));
+
+  renderCardGraph();
+  renderChart();
+  onReveal(cardGraph, () => revealGraph(cardGraph));
+  onReveal(chartGraph, () => revealGraph(chartGraph));
+
+  // Graphs draw at pixel width, so redraw when their container resizes.
+  if ('ResizeObserver' in window) {
+    let lastCard = cardGraph.clientWidth, lastChart = chartGraph.clientWidth;
+    new ResizeObserver(() => {
+      if (cardGraph.clientWidth !== lastCard) { lastCard = cardGraph.clientWidth; renderCardGraph(); }
+      if (chartGraph.clientWidth !== lastChart) { lastChart = chartGraph.clientWidth; renderChart(); }
+    }).observe(document.body);
+  }
+
+  // ── Weekly / monthly grids ──────────────────────────────────────────────────
+  // Cells shade at 0.2 + 0.8 × ratio (HabitSquare); the current period gets the white edge.
+  function cellHTML(ratio, colour, isNow, delay) {
+    const bg = ratio > 0 ? `background:${hexToRgba(colour, 0.2 + 0.8 * Math.min(1, ratio))};` : '';
+    return `<div class="cell${isNow ? ' now' : ''}" style="${bg}--d:${delay}s"></div>`;
+  }
+  const cardColour = el => getComputedStyle(el.closest('.habit-card')).getPropertyValue('--c').trim();
+
+  // WeeklyGrid: 52 weeks in 12 month columns (a week belongs to its Monday's month),
+  // up to 5 rows; the rest of the current month is drawn as empty future weeks.
+  document.querySelectorAll('[data-weekly-grid]').forEach(el => {
+    const target = +el.dataset.target;
+    const colour = cardColour(el);
+    const rand = seeded(7);
+    const cols = Array.from({ length: 12 }, (_, i) => {
+      const d = new Date(thisMonday.getFullYear(), thisMonday.getMonth() - (11 - i), 1);
+      return { y: d.getFullYear(), m: d.getMonth(), weeks: [] };
+    });
+    for (let ago = 51; ago >= 0; ago--) {
+      const mon = new Date(thisMonday);
+      mon.setDate(mon.getDate() - ago * 7);
+      const col = cols.find(c => c.y === mon.getFullYear() && c.m === mon.getMonth());
+      if (!col) continue;
+      // Mostly hitting 3, the odd 2, a rare off week — and 2 so far this week.
+      const r = rand();
+      const value = ago === 0 ? 2 : r < 0.07 ? 0 : r < 0.18 ? 1 : r < 0.42 ? 2 : 3;
+      col.weeks.push({ ratio: value / target, now: ago === 0 });
+    }
+    const last = cols[11];
+    for (let k = 1; last.weeks.length < 5; k++) {
+      const next = new Date(thisMonday);
+      next.setDate(next.getDate() + k * 7);
+      if (next.getMonth() !== last.m) break;
+      last.weeks.push({ ratio: 0, now: false });
+    }
+    el.innerHTML =
+      `<div class="period-grid">
+         <div class="month-labels">${cols.map(c => `<span>${MONTHS[c.m]}</span>`).join('')}</div>
+         <div class="period-cols">${cols.map((c, ci) => `<div class="period-col">${
+           Array.from({ length: 5 }, (_, r) => c.weeks[r]
+             ? cellHTML(c.weeks[r].ratio, colour, c.weeks[r].now, (ci * 5 + r) * 0.012)
+             : '<div class="cell blank"></div>').join('')
+         }</div>`).join('')}</div>
+       </div>`;
+  });
+
+  // MonthlyGrid: the last 12 months in one row.
+  document.querySelectorAll('[data-monthly-grid]').forEach(el => {
+    const target = +el.dataset.target;
+    const colour = cardColour(el);
+    const books = [2, 1, 2, 2, 0, 2, 1, 2, 2, 2, 2, 1];
+    const today = new Date();
+    const months = Array.from({ length: 12 }, (_, i) => (today.getMonth() - (11 - i) + 12) % 12);
+    el.innerHTML =
+      `<div class="period-grid">
+         <div class="month-labels">${months.map(m => `<span>${MONTHS[m]}</span>`).join('')}</div>
+         <div class="period-cols">${books.map((v, i) => cellHTML(v / target, colour, i === 11, i * 0.04)).join('')}</div>
+       </div>`;
+  });
+
+  document.querySelectorAll('.anim-cells').forEach(el => {
+    // Start each grid at its newest column when it's wider than the card, like the app.
+    const scroller = el.parentElement;
+    scroller.scrollLeft = scroller.scrollWidth;
+    onReveal(el, () => el.classList.add('in'));
   });
 </script>
 

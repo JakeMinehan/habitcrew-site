@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAQ — HabitCrew</title>
+<meta name="description" content="Answers to common questions about HabitCrew, the group habit tracker for iPhone and Android: group habits, group chat, nudges, and weekly and monthly goals.">
+<link rel="canonical" href="https://habitcrew.co/faq/">
+<meta name="apple-itunes-app" content="app-id=6787154922">
+<!-- Mirrors the questions below so search engines and AI assistants can quote them.
+     Keep the two in sync when an answer changes. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is HabitCrew?",
+      "acceptedAnswer": { "@type": "Answer", "text": "HabitCrew is a habit tracker for iPhone and Android built for doing habits with friends. You can share a habit with up to 4 other people, see everyone's progress in one place, chat in a group chat for each habit, and nudge teammates who haven't completed it yet. You can also track habits on your own." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is HabitCrew available on iPhone and Android?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. HabitCrew is on the App Store for iPhone and on Google Play for Android." }
+    },
+    {
+      "@type": "Question",
+      "name": "How many people can join a group habit?",
+      "acceptedAnswer": { "@type": "Answer", "text": "A group habit can have up to 5 members, including you." }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I invite friends to a group habit?",
+      "acceptedAnswer": { "@type": "Answer", "text": "First add your friends by searching for their username in the app. Then invite them when you create a group habit. The habit's owner can invite more people later from the habit's Members screen." }
+    },
+    {
+      "@type": "Question",
+      "name": "How does group progress work?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Everyone in a group habit logs their own completions, and nobody's progress affects anyone else's. The Group Progress view shows each member's progress for the current day, week or month as a ring around their profile picture, and a graph compares everyone over the past 12 weeks (or 12 days for daily habits). Tap a member to highlight their line, or choose Group to see the whole group combined." }
+    },
+    {
+      "@type": "Question",
+      "name": "Does HabitCrew support weekly and monthly habits?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. Every habit has a goal per day, per week or per month, such as 3 gym sessions a week or 2 books a month. You can also set a count for each period, such as 8 glasses of water a day, and partial progress is shown as you go." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is there a group chat?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. Every group habit has its own group chat for its members, so you can cheer each other on right next to your progress." }
+    },
+    {
+      "@type": "Question",
+      "name": "What is a nudge?",
+      "acceptedAnswer": { "@type": "Answer", "text": "A nudge is a reminder you send to a teammate in a group habit. They get a notification such as \"jake nudged you to complete Morning Run\". You can nudge people you are friends with, once a day per person in each group habit, and only if they haven't already completed the habit." }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I use HabitCrew on my own?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. You can track solo habits as well as group habits, and you can mark a solo habit as private so others can't see it." }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I get help?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Visit the Support page at habitcrew.co/support or email support@habitcrew.co." }
+    }
+  ]
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0A0A0B;
+    --white: #F4F3F1;
+    --muted: #9A9A9E;
+    --rule: rgba(255,255,255,0.10);
+    --green: #8DC63F;
+    --card: #131313;
+    --max: 680px;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--white);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, .wordmark {
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 700;
+    color: var(--white);
+  }
+
+  a { color: var(--green); text-decoration: none; }
+  a:hover, a:focus-visible { text-decoration: underline; }
+  a:focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
+
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+
+  header { padding: 30px 0 0; }
+  .wordmark {
+    font-size: 21px;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 3px;
+    color: var(--white);
+  }
+  .wordmark .dot { color: var(--green); }
+
+  .doc-header { padding: 46px 0 8px; border-bottom: 1px solid var(--rule); margin-bottom: 32px; }
+  .doc-header h1 { font-size: clamp(30px, 4vw, 40px); margin: 0 0 10px; }
+  .doc-header .subtitle { color: var(--muted); font-size: 15.5px; margin: 0 0 30px; }
+
+  details {
+    border-bottom: 1px solid var(--rule);
+    padding: 18px 0;
+  }
+  details:first-of-type { padding-top: 0; }
+
+  summary {
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    list-style: none;
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary::before {
+    content: "+";
+    color: var(--green);
+    font-family: 'Baloo 2', sans-serif;
+    font-size: 18px;
+    width: 16px;
+    flex-shrink: 0;
+  }
+  details[open] summary::before { content: "−"; }
+
+  details p {
+    margin: 12px 0 2px 26px;
+    color: var(--muted);
+    font-size: 15px;
+  }
+
+  .contact-box {
+    background: var(--card);
+    border: 1px solid var(--rule);
+    border-radius: 16px;
+    padding: 22px 26px;
+    margin-top: 44px;
+    font-size: 15.5px;
+    color: var(--muted);
+  }
+  .contact-box a { font-weight: 700; }
+
+  footer {
+    border-top: 1px solid var(--rule);
+    margin-top: 56px;
+    padding: 28px 24px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    max-width: var(--max);
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .foot-left { font-size: 13px; color: var(--muted); }
+  .foot-links { display: flex; gap: 22px; font-size: 13px; flex-wrap: wrap; }
+  .foot-links a { color: var(--muted); }
+  .foot-links a:hover { color: var(--white); }
+
+  @media (max-width: 600px) {
+    footer { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="wordmark" href="/">habitcrew<span class="dot">.</span></a>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div class="doc-header">
+    <h1>Frequently asked questions</h1>
+    <p class="subtitle">Everything you need to know about building habits with your crew.</p>
+  </div>
+
+  <details>
+    <summary>What is HabitCrew?</summary>
+    <p>HabitCrew is a habit tracker for iPhone and Android built for doing habits with friends. You can share a habit with up to 4 other people, see everyone's progress in one place, chat in a group chat for each habit, and nudge teammates who haven't completed it yet. You can also track habits on your own.</p>
+  </details>
+
+  <details>
+    <summary>Is HabitCrew available on iPhone and Android?</summary>
+    <p>Yes. HabitCrew is on the <a href="https://apps.apple.com/au/app/habit-tracker-habitcrew/id6787154922" target="_blank" rel="noopener">App Store</a> for iPhone and on <a href="https://play.google.com/store/apps/details?id=co.habitcrew.app" target="_blank" rel="noopener">Google Play</a> for Android.</p>
+  </details>
+
+  <details>
+    <summary>How many people can join a group habit?</summary>
+    <p>A group habit can have up to 5 members, including you.</p>
+  </details>
+
+  <details>
+    <summary>How do I invite friends to a group habit?</summary>
+    <p>First add your friends by searching for their username in the app. Then invite them when you create a group habit. The habit's owner can invite more people later from the habit's Members screen.</p>
+  </details>
+
+  <details>
+    <summary>How does group progress work?</summary>
+    <p>Everyone in a group habit logs their own completions, and nobody's progress affects anyone else's. The Group Progress view shows each member's progress for the current day, week or month as a ring around their profile picture, and a graph compares everyone over the past 12 weeks (or 12 days for daily habits). Tap a member to highlight their line, or choose Group to see the whole group combined.</p>
+  </details>
+
+  <details>
+    <summary>Does HabitCrew support weekly and monthly habits?</summary>
+    <p>Yes. Every habit has a goal per day, per week or per month, such as 3 gym sessions a week or 2 books a month. You can also set a count for each period, such as 8 glasses of water a day, and partial progress is shown as you go.</p>
+  </details>
+
+  <details>
+    <summary>Is there a group chat?</summary>
+    <p>Yes. Every group habit has its own group chat for its members, so you can cheer each other on right next to your progress.</p>
+  </details>
+
+  <details>
+    <summary>What is a nudge?</summary>
+    <p>A nudge is a reminder you send to a teammate in a group habit. They get a notification such as "jake nudged you to complete Morning Run". You can nudge people you are friends with, once a day per person in each group habit, and only if they haven't already completed the habit.</p>
+  </details>
+
+  <details>
+    <summary>Can I use HabitCrew on my own?</summary>
+    <p>Yes. You can track solo habits as well as group habits, and you can mark a solo habit as private so others can't see it.</p>
+  </details>
+
+  <details>
+    <summary>How do I get help?</summary>
+    <p>Visit the <a href="/support">Support page</a> or email <a href="mailto:support@habitcrew.co">support@habitcrew.co</a>.</p>
+  </details>
+
+  <div class="contact-box">
+    Still have a question? Email us at <a href="mailto:support@habitcrew.co">support@habitcrew.co</a> and we'll get back to you as soon as we can.
+  </div>
+
+</main>
+
+<footer>
+  <div class="foot-left">© 2026 HabitCrew</div>
+  <nav class="foot-links">
+    <a href="/faq">FAQ</a>
+    <a href="/privacy">Privacy Policy</a>
+    <a href="/terms">Terms of Service</a>
+    <a href="/support">Support</a>
+    <a href="mailto:support@habitcrew.co">support@habitcrew.co</a>
+  </nav>
+</footer>
+
+</body>
+</html>

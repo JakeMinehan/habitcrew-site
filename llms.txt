@@ -1,0 +1,31 @@
+# HabitCrew
+
+> HabitCrew is a habit tracker for iPhone and Android built for doing habits with friends. Up to 5 people can share a habit, see each other's progress, chat in a group chat for each habit, and nudge teammates who haven't completed it yet. It also supports solo habits and daily, weekly and monthly goals.
+
+HabitCrew suits people who find it easier to stick with a habit when someone else is counting on them, such as friends training together, couples, housemates, families or small teams.
+
+Key facts:
+- Platforms: iPhone (App Store) and Android (Google Play)
+- Group habits: up to 5 members per habit, including the creator
+- Group Progress: each member's progress for the current day, week or month shown as a ring around their profile picture, plus a graph comparing every member over the past 12 weeks (12 days for daily habits)
+- Group chat: every group habit has its own chat
+- Nudges: send a teammate a reminder notification to complete the habit (friends only, once a day per person per group habit)
+- Flexible goals: a target per day, week or month (e.g. 3 gym sessions a week, 2 books a month), with counts such as 8 glasses of water a day
+- Solo habits can be marked private
+
+## Download
+
+- [App Store (iPhone)](https://apps.apple.com/au/app/habit-tracker-habitcrew/id6787154922)
+- [Google Play (Android)](https://play.google.com/store/apps/details?id=co.habitcrew.app)
+
+## Pages
+
+- [Home](https://habitcrew.co/): overview of group habits, group progress, chat and nudges, and weekly and monthly habits
+- [FAQ](https://habitcrew.co/faq/): common questions about how HabitCrew works
+- [Support](https://habitcrew.co/support/): help, account deletion, and contact details
+- [Privacy Policy](https://habitcrew.co/privacy/)
+- [Terms of Service](https://habitcrew.co/terms/)
+
+## Contact
+
+support@habitcrew.co
