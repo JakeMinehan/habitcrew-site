@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Get HabitCrew</title>
+<meta name="description" content="Download HabitCrew on the App Store or Google Play.">
+<!-- Share link used from inside the app. Not linked from the site and kept out of search results. -->
+<meta name="robots" content="noindex">
+<!-- Link preview when the URL is pasted into Messages, WhatsApp, etc. -->
+<meta property="og:title" content="Join me on HabitCrew">
+<meta property="og:description" content="Build streaks you don't do alone. Free on iPhone and Android.">
+<meta property="og:image" content="https://habitcrew.co/assets/app-icon.png">
+<meta property="og:url" content="https://habitcrew.co/get">
+<meta property="og:type" content="website">
+<script>
+  // Send phones straight to their store. Desktop (and anything unrecognised) stays on this page.
+  (function () {
+    var ua = navigator.userAgent || '';
+    // iPadOS 13+ reports itself as a Mac, so also check for a touchscreen.
+    var isIOS = /iPhone|iPad|iPod/i.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+    var isAndroid = /Android/i.test(ua);
+    if (isIOS) {
+      location.replace('https://apps.apple.com/app/id6787154922');
+    } else if (isAndroid) {
+      location.replace('https://play.google.com/store/apps/details?id=co.habitcrew.app');
+    }
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0A0A0B;
+    --white: #F4F3F1;
+    --muted: #9A9A9E;
+    --rule: rgba(255,255,255,0.10);
+    --green: #8DC63F;
+    --card: #131313;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg);
+    color: var(--white);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    text-align: center;
+    padding: 24px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .icon { width: 88px; height: 88px; border-radius: 20px; margin-bottom: 18px; }
+
+  h1 {
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 700;
+    font-size: 30px;
+    margin: 0 0 6px;
+  }
+
+  p { color: var(--muted); font-size: 15.5px; margin: 0 0 28px; }
+
+  .stores { display: flex; flex-direction: column; gap: 12px; max-width: 280px; margin: 0 auto; }
+
+  .stores a {
+    display: block;
+    padding: 14px 20px;
+    border-radius: 14px;
+    background: var(--card);
+    border: 1px solid var(--rule);
+    color: var(--white);
+    font-weight: 700;
+    font-size: 15.5px;
+    text-decoration: none;
+  }
+  .stores a:hover, .stores a:focus-visible { border-color: var(--green); }
+  .stores a:focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
+
+  .home { display: inline-block; margin-top: 28px; color: var(--muted); font-size: 13px; }
+</style>
+</head>
+<body>
+
+<main>
+  <img class="icon" src="/assets/app-icon.png" alt="HabitCrew app icon">
+  <h1>Get HabitCrew</h1>
+  <p>Build streaks you don't do alone.</p>
+  <div class="stores">
+    <a href="https://apps.apple.com/app/id6787154922">Download on the App Store</a>
+    <a href="https://play.google.com/store/apps/details?id=co.habitcrew.app">Get it on Google Play</a>
+  </div>
+  <a class="home" href="/">habitcrew.co</a>
+</main>
+
+</body>
+</html>
