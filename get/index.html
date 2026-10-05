@@ -10,8 +10,18 @@
 <!-- Link preview when the URL is pasted into Messages, WhatsApp, etc. -->
 <meta property="og:title" content="Join me on HabitCrew">
 <meta property="og:description" content="Build streaks you don't do alone. Free on iPhone and Android.">
-<meta property="og:image" content="https://habitcrew.co/assets/app-icon.png">
-<meta property="og:url" content="https://habitcrew.co/get">
+<!-- Messenger/Facebook ignore images under 200x200, so this is the full-size icon
+     rather than the small app-icon.png the rest of the site uses. -->
+<meta property="og:image" content="https://habitcrew.co/assets/share-icon.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1024">
+<meta property="og:image:height" content="1024">
+<meta property="og:image:alt" content="HabitCrew app icon">
+<meta property="og:site_name" content="HabitCrew">
+<!-- Must match the final address: /get redirects to /get/, and an og:url that
+     redirects makes Facebook's scraper drop the preview. -->
+<meta property="og:url" content="https://habitcrew.co/get/">
+<meta name="twitter:card" content="summary">
 <meta property="og:type" content="website">
 <script>
   // Send phones straight to their store. Desktop (and anything unrecognised) stays on this page.
