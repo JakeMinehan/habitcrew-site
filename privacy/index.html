@@ -198,7 +198,7 @@
 
   <div class="doc-header">
     <h1>Privacy Policy</h1>
-    <p class="updated">Last updated September 22, 2026</p>
+    <p class="updated">Last updated October 25, 2026</p>
   </div>
 
   <div class="lede">
@@ -229,7 +229,7 @@
       <dd>We process your information to provide, improve, and administer our Services, communicate with you, for security and fraud prevention, and to comply with law. We may also process your information for other purposes with your consent. Learn more in <a href="#infouse">How Do We Process Your Information?</a></dd>
 
       <dt>In what situations and with which parties do we share personal information?</dt>
-      <dd>We may share information in specific situations and with specific third parties. Learn more in <a href="#whoshare">When And With Whom Do We Share Your Personal Information?</a></dd>
+      <dd>We may share information in specific situations and with specific third parties, including limited app install information with Meta so we can measure whether our ads lead to installs. Learn more in <a href="#whoshare">When And With Whom Do We Share Your Personal Information?</a></dd>
 
       <dt>How do we keep your information safe?</dt>
       <dd>We have adequate organisational and technical processes and procedures in place to protect your personal information. However, no electronic transmission over the internet or information storage technology can be guaranteed to be 100% secure. Learn more in <a href="#infosafe">How Do We Keep Your Information Safe?</a></dd>
@@ -298,6 +298,20 @@
       <li><em>Log and usage data.</em> Log and usage data is service-related, diagnostic, usage, and performance information our servers automatically collect when you access or use our Services and which we record in log files. Depending on how you interact with us, this log data may include your IP address, device information, browser type and settings, and information about your activity in the Services (such as date/time stamps, pages and files viewed, searches, and other actions you take), device event information (such as system activity, error reports, and hardware settings).</li>
       <li><em>Device data.</em> We collect device data such as information about your computer, phone, tablet, or other device you use to access the Services. This may include your IP address (or proxy server), device and application identification numbers, location, browser type, hardware model, internet service provider and/or mobile carrier, operating system, and system configuration information.</li>
     </ul>
+
+    <h3 id="adattribution">Advertising attribution</h3>
+    <div class="in-short"><strong>In short:</strong> Our mobile app shares limited install information with Meta so we can tell whether installs came from our ads on Facebook and Instagram. We have turned off every other part of Meta's tracking that we can.</div>
+    <p>We advertise HabitCrew on Meta platforms such as Facebook and Instagram. To run app install ads, Meta needs to be told when its ads lead to installs, so our mobile app includes Meta's software development kit (the "Meta SDK", also known as the Facebook SDK), provided by Meta Platforms, Inc. and its affiliates ("Meta"). We use the Meta SDK for this one purpose only: to measure whether installs of our app came from our ads.</p>
+    <p>We have set up the Meta SDK to share as little as possible:</p>
+    <ul class="plain">
+      <li>It only reports when the app is installed and opened, along with basic session information such as how long the app was open. We do not send Meta any other events about what you do in the app, and we have turned off the SDK's automatic logging of in-app purchases.</li>
+      <li>We have turned off the SDK's collection of your device's advertising identifier, and on iOS we never ask for permission to track you.</li>
+      <li>We do not send Meta your name, email address, username, habit data, or group chat messages.</li>
+      <li>We use Meta's Limited Data Use setting, which limits how Meta may use this information for people in US states with applicable privacy laws.</li>
+    </ul>
+    <p>With each install or app-open event, the SDK sends Meta basic technical information, such as your device model, operating system and version, app version, language, and time zone, your IP address, and a random identifier the SDK creates for our app. On Android, it also sends install referrer information from Google Play, which shows whether the install came from an ad. Meta uses this information to match installs to our ads and gives us aggregated reports, such as how many installs a campaign produced. These reports do not tell us which individual users saw or tapped our ads.</p>
+    <p>On iOS, we also use SKAdNetwork, Apple's privacy-preserving ad attribution system. If you install the app from an ad, Apple may tell Meta — after a delay, and without any user or device identifier — that the install came from an ad and whether you later created an account or bought a subscription.</p>
+    <p>Meta processes the information it receives in accordance with its own Privacy Policy, which you can read at <a href="https://www.facebook.com/privacy/policy/" target="_blank" rel="noopener">https://www.facebook.com/privacy/policy/</a>.</p>
   </section>
 
   <!-- 2 -->
@@ -314,6 +328,7 @@
       <li><strong>To request feedback.</strong> We may process your information when necessary to request feedback and to contact you about your use of our Services.</li>
       <li><strong>To protect our Services.</strong> We may process your information as part of our efforts to keep our Services safe and secure, including fraud monitoring and prevention.</li>
       <li><strong>To identify usage trends.</strong> We may process information about how you use our Services to better understand how they are being used so we can improve them.</li>
+      <li><strong>To measure our advertising.</strong> We may process information about app installs to find out whether they came from our ads on Meta platforms. Learn more in <a href="#adattribution">Advertising Attribution</a>.</li>
       <li><strong>To save or protect an individual's vital interest.</strong> We may process your information when necessary to save or protect an individual's vital interest, such as to prevent harm.</li>
     </ul>
     <p><strong>When we may access chat messages.</strong> We do not routinely read chat messages. We may access message content only (a) when it is reported to us for abuse or a breach of our Terms, (b) when you ask us to for a support request, or (c) where required by law.</p>
@@ -335,6 +350,7 @@
           <li>Diagnose problems and/or prevent fraudulent activities</li>
           <li>Understand how our users use our products and services so we can improve user experience</li>
           <li>Review reported content to keep our Services safe and enforce our Terms</li>
+          <li>Measure whether our ads lead to app installs</li>
         </ul>
       </li>
       <li><strong>Legal obligations.</strong> We may process your information where we believe it is necessary for compliance with our legal obligations, such as to cooperate with a law enforcement body or regulatory agency, exercise or defend our legal rights, or disclose your information as evidence in litigation in which we are involved.</li>
@@ -364,13 +380,14 @@
   <section class="doc-section" id="whoshare">
     <h2>4. When and with whom do we share your personal information?</h2>
     <div class="in-short"><strong>In short:</strong> We may share information in specific situations described in this section and/or with the following third parties.</div>
-    <p><strong>Vendors, consultants, and other third-party service providers.</strong> We may share your data with third-party vendors, service providers, contractors, or agents ("third parties") who perform services for us or on our behalf and require access to such information to do that work. We have contracts in place with our third parties, which are designed to help safeguard your personal information. This means they cannot do anything with your personal information unless we have instructed them to do it, and they will not share your personal information with any organisation apart from us. They also commit to protect the data they hold on our behalf and to retain it for the period we instruct.</p>
+    <p><strong>Vendors, consultants, and other third-party service providers.</strong> We may share your data with third-party vendors, service providers, contractors, or agents ("third parties") who perform services for us or on our behalf and require access to such information to do that work. We have contracts in place with our third parties, which are designed to help safeguard your personal information. This means they cannot do anything with your personal information unless we have instructed them to do it, and they will not share your personal information with any organisation apart from us. They also commit to protect the data they hold on our behalf and to retain it for the period we instruct. Meta is an exception: it receives limited app install information from our mobile app for advertising attribution and uses that information under its own terms and Privacy Policy, not only on our instructions (see <a href="#adattribution">Advertising Attribution</a>).</p>
     <p>The third parties we may share personal information with are as follows:</p>
     <ul class="plain">
       <li><strong>Cloud computing services</strong> — Supabase</li>
       <li><strong>Invoice and billing</strong> — RevenueCat and Apple Pay</li>
       <li><strong>User account registration and authentication</strong> — Supabase Authentication</li>
       <li><strong>Web and mobile analytics</strong> — PostHog. Group chat message content is never shared with our analytics provider.</li>
+      <li><strong>Advertising attribution</strong> — Meta, which receives app install and open events from the Meta SDK in our mobile app so we can measure whether installs came from our ads. Meta uses this information under its own terms and <a href="https://www.facebook.com/privacy/policy/" target="_blank" rel="noopener">Privacy Policy</a>. Learn more in <a href="#adattribution">Advertising Attribution</a>.</li>
       <li><strong>Push notifications</strong> — Expo Push Notification Service, which delivers notifications via the Apple Push Notification service (iOS) and Firebase Cloud Messaging (Android)</li>
     </ul>
     <p>We also may need to share your personal information in the following situations:</p>
@@ -464,7 +481,7 @@
           <tr><td>C. Protected classification characteristics under state or federal law</td><td>Gender, age, date of birth, race and ethnicity, national origin, marital status, and other demographic data</td><td class="no">NO</td></tr>
           <tr><td>D. Commercial information</td><td>Transaction information, purchase history, financial details, and payment information</td><td class="yes">YES</td></tr>
           <tr><td>E. Biometric information</td><td>Fingerprints and voiceprints</td><td class="no">NO</td></tr>
-          <tr><td>F. Internet or other similar network activity</td><td>Information about how you use and interact with our application and website, such as screens and pages viewed, features used, and in-app actions, collected through our analytics provider</td><td class="yes">YES</td></tr>
+          <tr><td>F. Internet or other similar network activity</td><td>Information about how you use and interact with our application and website, such as screens and pages viewed, features used, and in-app actions, collected through our analytics provider, and app install and open events used for advertising attribution</td><td class="yes">YES</td></tr>
           <tr><td>G. Geolocation data</td><td>Device location</td><td class="no">NO</td></tr>
           <tr><td>H. Audio, electronic, sensory, or similar information</td><td>Images and audio, video or call recordings created in connection with our business activities</td><td class="no">NO</td></tr>
           <tr><td>I. Professional or employment-related information</td><td>Business contact details in order to provide our Services at a business level, job title, work history, and professional qualifications if you apply for a job with us</td><td class="no">NO</td></tr>
@@ -497,7 +514,8 @@
     <p>Learn more about how we use your personal information in <a href="#infouse">How Do We Process Your Information?</a></p>
     <p><strong>Will your information be shared with anyone else?</strong> We may disclose your personal information with our service providers pursuant to a written contract between us and each service provider. Learn more in <a href="#whoshare">When And With Whom Do We Share Your Personal Information?</a></p>
     <p>We may use your personal information for our own business purposes, such as undertaking internal research for technological development and demonstration. This is not considered "selling" of your personal information.</p>
-    <p>We have not sold or shared any personal information to third parties for a business or commercial purpose in the preceding twelve (12) months. We have disclosed the following categories of personal information to third parties for a business or commercial purpose in the preceding twelve (12) months:</p>
+    <p>We have not sold any personal information in the preceding twelve (12) months. We do share limited app install information with Meta for advertising attribution: identifiers (such as your IP address and a random identifier the Meta SDK creates for our app) and app install and open events. For people in US states with applicable privacy laws, we use Meta's Limited Data Use setting, under which Meta limits its use of this information and acts as our service provider. Learn more in <a href="#adattribution">Advertising Attribution</a>.</p>
+    <p>We have disclosed the following categories of personal information to third parties for a business or commercial purpose in the preceding twelve (12) months:</p>
     <ul class="plain">
       <li>Category A. Identifiers</li>
       <li>Category D. Commercial information</li>
